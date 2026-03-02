@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Excel 911｜表格急救站</title>
+  <style>
+    body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;max-width:760px;margin:0 auto;padding:18px;background:#0f172a;color:#e2e8f0}
+    .card{background:#111827;border:1px solid #334155;border-radius:14px;padding:14px;margin:12px 0}
+    textarea{width:100%;min-height:96px;background:#0b1220;color:#fff;border:1px solid #334155;border-radius:10px;padding:10px}
+    button{background:#6366f1;color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+    pre{white-space:pre-wrap;background:#0b1220;border:1px solid #334155;border-radius:10px;padding:10px}
+    .muted{color:#94a3b8;font-size:13px}
+  </style>
+</head>
+<body>
+  <h1>Excel 911（MVP）</h1>
+  <p class="muted">输入你的表格需求，我先给你可直接试的公式 + 排错步骤。</p>
+  <div class="card">
+    <textarea id="input" placeholder="例如：我想按A列客户名去重后，汇总B列金额，并按月份统计"></textarea>
+    <br/><br/>
+    <button id="run">生成方案</button>
+  </div>
+  <div class="card">
+    <h3>推荐公式</h3>
+    <pre id="formula">等待生成...</pre>
+    <h3>解释与排错</h3>
+    <pre id="explain">等待生成...</pre>
+  </div>
+
+<script>
+const presets = [
+  {k:['去重','汇总','金额'],f:'=LET(u,UNIQUE(A2:A999),SUMIFS(B:B,A:A,u))',e:'1) UNIQUE提取客户\n2) SUMIFS按客户求和\n3) 若报错，检查B列是否数值格式'},
+  {k:['vlookup','查找'],f:'=XLOOKUP(E2,A:A,B:B,"未找到")',e:'优先XLOOKUP；旧版用VLOOKUP并固定区域'},
+  {k:['月份','统计'],f:'=SUMIFS(C:C,A:A,">="&DATE(2026,3,1),A:A,"<"&DATE(2026,4,1))',e:'按日期区间统计；注意日期列必须是日期格式'}
+];
+
+function pick(text){
+  const hit = presets.find(p=>p.k.some(k=>text.includes(k)));
+  return hit || {f:'=IFERROR(你的公式,"请检查范围和数据类型")',e:'建议补充：数据列、目标结果、Excel版本。'};
+}
+
+document.getElementById('run').onclick=()=>{
+  const t=document.getElementById('input').value.trim();
+  const r=pick(t);
+  document.getElementById('formula').textContent=r.f;
+  document.getElementById('explain').textContent=r.e;
+};
+</script>
+</body>
+</html>
