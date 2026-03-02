@@ -159,7 +159,7 @@
         <h1>🎯 纳瓦尔人生定位测评</h1>
         <p class="naval-quote">"Seek wealth, not money or status."<br>— Naval Ravikant</p>
         <p style="text-align:center;color:#666;margin:16px 0;">基于纳瓦尔财富与幸福哲学<br>20道题，找到你的人生定位</p>
-        <button onclick="start()">开始测评</button>
+        <button id="startBtn">开始测评</button>
         <p style="text-align:center;color:#999;font-size:12px;margin-top:12px;">约需3分钟</p>
     </div>
     
@@ -182,6 +182,8 @@
     </div>
 
     <script>
+    document.getElementById('startBtn').addEventListener('click', start);
+    
     var current = 0;
     var answers = [];
     
