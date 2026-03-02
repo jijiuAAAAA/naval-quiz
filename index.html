@@ -22,143 +22,32 @@
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
-        h1 { 
-            text-align: center; 
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-        .progress-bar {
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            margin-bottom: 16px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
-        }
-        .progress-text {
-            text-align: center;
-            color: #999;
-            font-size: 12px;
-            margin-bottom: 16px;
-        }
-        .question {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            color: #2c3e50;
-        }
-        button { 
-            width: 100%; 
-            padding: 14px; 
-            font-size: 16px; 
-            background: linear-gradient(135deg, #667eea, #764ba2); 
-            color: white; 
-            border: none; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            margin: 8px 0;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        button:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+        h1 { text-align: center; font-size: 22px; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 16px; }
+        .progress-bar { height: 6px; background: #e0e0e0; border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s ease; }
+        .progress-text { text-align: center; color: #999; font-size: 12px; margin-bottom: 16px; }
+        .question { font-size: 17px; font-weight: 600; margin-bottom: 20px; line-height: 1.6; color: #2c3e50; }
+        button { width: 100%; padding: 14px; font-size: 16px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; cursor: pointer; margin: 8px 0; font-weight: 600; transition: all 0.3s ease; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); }
+        button:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
         .hidden { display: none; }
-        .option { 
-            padding: 14px 16px; 
-            border: 2px solid #e0e0e0; 
-            margin: 8px 0; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            font-size: 14px;
-            line-height: 1.5;
-            transition: all 0.2s ease;
-            text-align: left;
-        }
-        .option:hover { 
-            border-color: #667eea; 
-            background: #f8f9ff;
-        }
-        .option.selected { 
-            border-color: #667eea; 
-            background: #e8ecff;
-        }
-        .result-type {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
-            margin: 16px 0;
-        }
-        .result-desc {
-            font-size: 15px;
-            line-height: 1.8;
-            color: #555;
-            padding: 16px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            margin-bottom: 16px;
-        }
-        .result-quote {
-            text-align: center;
-            font-style: italic;
-            color: #888;
-            font-size: 13px;
-            margin: 16px 0;
-            padding: 12px;
-            background: #f0f0f0;
-            border-radius: 8px;
-        }
-        .naval-quote {
-            text-align: center;
-            font-style: italic;
-            color: #888;
-            margin: 16px 0;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        .types-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin: 16px 0;
-        }
-        .type-item {
-            padding: 8px;
-            font-size: 12px;
-            text-align: center;
-            background: #f0f0f0;
-            border-radius: 6px;
-        }
-        .type-item.top {
-            background: #667eea;
-            color: white;
-        }
+        .option { padding: 14px 16px; border: 2px solid #e0e0e0; margin: 8px 0; border-radius: 12px; cursor: pointer; font-size: 14px; line-height: 1.5; transition: all 0.2s ease; text-align: left; }
+        .option:hover { border-color: #667eea; background: #f8f9ff; }
+        .option.selected { border-color: #667eea; background: #e8ecff; }
+        .result-type { text-align: center; font-size: 24px; font-weight: bold; color: #667eea; margin: 16px 0; }
+        .result-desc { font-size: 15px; line-height: 1.8; color: #555; padding: 16px; background: #f8f9fa; border-radius: 12px; margin-bottom: 16px; }
+        .result-quote { text-align: center; font-style: italic; color: #888; font-size: 13px; margin: 16px 0; padding: 12px; background: #f0f0f0; border-radius: 8px; }
+        .naval-quote { text-align: center; font-style: italic; color: #888; margin: 16px 0; font-size: 13px; line-height: 1.6; }
+        .types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 16px 0; }
+        .type-item { padding: 8px; font-size: 12px; text-align: center; background: #f0f0f0; border-radius: 6px; }
     </style>
 </head>
 <body>
     <div class="container" id="page1">
         <h1>🎯 纳瓦尔人生定位测评</h1>
         <p class="naval-quote">"Seek wealth, not money or status."<br>— Naval Ravikant</p>
-        <p style="text-align:center;color:#666;margin:16px 0;">基于纳瓦尔财富与幸福哲学<br>20道题，找到你的人生定位</p>
+        <p style="text-align:center;color:#666;margin:16px0;">基于纳瓦尔财富与幸福哲学<br>20道题，找到你的人生定位</p>
         <button id="startBtn">开始测评</button>
         <p style="text-align:center;color:#999;font-size:12px;margin-top:12px;">约需3分钟</p>
     </div>
@@ -168,7 +57,7 @@
         <p class="progress-text" id="progressText">1 / 20</p>
         <p class="question" id="qtitle"></p>
         <div id="options"></div>
-        <button id="nextBtn" onclick="next()" disabled>下一题</button>
+        <button id="nextBtn" disabled>下一题</button>
     </div>
     
     <div class="container hidden" id="page3">
@@ -176,159 +65,58 @@
         <p class="result-type" id="resultTitle"></p>
         <div class="result-desc" id="resultDesc"></div>
         <div class="result-quote" id="resultQuote"></div>
-        <p style="text-align:center;color:#666;font-size:13px;margin:16px 0;">其他类型得分</p>
+        <p style="text-align:center;color:#666;font-size:13px;margin:16px0;">其他类型得分</p>
         <div class="types-grid" id="typesGrid"></div>
         <button onclick="location.reload()">重新测评</button>
     </div>
 
     <script>
     document.getElementById('startBtn').addEventListener('click', start);
+    document.getElementById('nextBtn').addEventListener('click', next);
     
     var current = 0;
     var answers = [];
     
-    // 16种类型
     var types = [
-        {id:"作品型", name:"作品型", desc:"你渴望创造能够流传于世的作品。纳瓦尔说："创造者留下作品，这是对抗时间的方式。"你相信文字、代码、艺术、设计是最有价值的资产。", quote:"\"The output of creative work is how you generate wealth.\""},
-        {id:"体验型", name:"体验型", desc:"你相信"没有白走的路"，每一段经历都是财富。纳瓦尔说生命是一场旅程，你渴望最大化体验的广度和深度。旅行、冒险、新奇事物是你的动力。", quote:"\"Life is not about money, not about status, it's about experiences.\""},
-        {id:"公益型", desc:"你具有强烈的同理心和利他主义。纳瓦尔说"幸福是一种选择"，你选择帮助他人。你相信真正的财富在于改变他人的生活。", name:"公益型", quote:"\"The goal is to make people’s lives better.\""},
-        {id:"成就型", desc:"你渴望成功和认可。纳瓦尔说要"和长期的人玩长期游戏"，你追求在某个领域做到顶尖，获得成就感和他人尊重。", name:"成就型", quote:"\"Become the best in the world at what you do.\""},
-        {id:"启发型", desc:"你热爱分享和启发他人。纳瓦尔说"教育是人类进步的基石"，你最大的快乐来自于看到别人因你而成长。", name:"启发型", quote:"\"Teach and you shall learn twice.\""},
-        {id:"理念型", desc:"你是一个理想主义者，有自己的价值观体系。纳瓦尔强调"理性佛教徒"——用理性思考来指导生活。你追求智慧和思想的深度。", name:"理念型", quote:"\"The rational mind is the servant of the emotional mind.\""},
-        {id:"追梦型", desc:"你敢于梦想，不惧失败。纳瓦尔说"如果你不持有观点，别人会替你决定"，你坚持自己的人生叙事，不随波逐流。", name:"追梦型", quote:"\"If you don't know what you're doing, someone else will.\""},
-        {id:"内修型", desc:"你注重内在成长和自我完善。纳瓦尔说"幸福是一种技能"，你通过冥想、阅读、反思来修炼内心平静。", name:"内修型", quote:"\"Happiness is a skill that can be developed.\""},
-        {id:"享受型", desc:"你懂得享受生活的美好。纳瓦尔说"钱买不到幸福，但能买到自由"，你相信及时行乐，享受当下的每一刻。", name:"享受型", quote:"\"Play and rest are important too.\""},
-        {id:"关系型", desc:"你重视人际关系和连接。纳瓦尔说"和长期的人玩长期游戏"，你相信人脉是最重要的资产，善于建立深度关系。", name:"关系型", quote:"\"Play long-term games with long-term people.\""},
-        {id:"稳健型", desc:"你追求稳定和安全感。纳瓦尔说"承担风险"，但你更倾向于稳健前行，注重风险控制和长期规划。", name:"稳健型", quote:"\"Take risk, but do it methodically.\""},
-        {id:"技能型", desc:"你相信专业主义。纳瓦尔说"specific knowledge无法被教导"，你追求在某个领域成为专家，这是你的核心竞争力。", name:"技能型", quote:"\"Arm yourself with specific knowledge.\""},
-        {id:"声望型", desc:"你渴望获得社会认可和地位。纳瓦尔说"status是零和游戏"，但你仍追求在自己的圈子里获得尊重和影响力。", name:"声望型", quote:"\"Status is a very old game.\""},
-        {id:"企业型", desc:"你有强烈的创业精神。纳瓦尔说"从0到1"，你不满足于执行别人的想法，渴望创建自己的组织和事业。", name:"企业型", quote:"\"Escape competition through authenticity.\""},
-        {id:"赚钱型", desc:"你热爱商业和财富创造。纳瓦尔说"wealth是睡觉时也在赚钱的资产"，你对商业机会敏感，追求财务自由。", name:"赚钱型", quote:"\"Wealth is assets that earn while you sleep.\""},
-        {id:"权力型", desc:"你渴望影响力和控制力。纳瓦尔说"权力来自于被需要"，你希望在自己的领域拥有话语权和决策权。", name:"权力型", quote:"\"Power comes from being needed.\""}
+        {id:0, name:"作品型", desc:"你渴望创造能够流传于世的作品。纳瓦尔说：创造者留下作品，这是对抗时间的方式。你相信文字、代码、艺术、设计是最有价值的资产。", quote:"The output of creative work is how you generate wealth."},
+        {id:1, name:"体验型", desc:"你相信没有白走的路，每一段经历都是财富。纳瓦尔说生命是一场旅程，你渴望最大化体验的广度和深度。旅行、冒险、新奇事物是你的动力。", quote:"Life is not about money, not about status."},
+        {id:2, name:"公益型", desc:"你具有强烈的同理心和利他主义。纳瓦尔说幸福是一种选择，你选择帮助他人。你相信真正的财富在于改变他人的生活。", quote:"The goal is to make people's lives better."},
+        {id:3, name:"成就型", desc:"你渴望成功和认可。纳瓦尔说要和长期的人玩长期游戏，你追求在某个领域做到顶尖，获得成就感和他人尊重。", quote:"Become the best in the world at what you do."},
+        {id:4, name:"启发型", desc:"你热爱分享和启发他人。纳瓦尔说教育是人类进步的基石，你最大的快乐来自于看到别人因你而成长。", quote:"Teach and you shall learn twice."},
+        {id:5, name:"理念型", desc:"你是一个理想主义者，有自己的价值观体系。纳瓦尔强调理性佛教徒——用理性思考来指导生活。你追求智慧和思想的深度。", quote:"The rational mind is the servant of the emotional mind."},
+        {id:6, name:"追梦型", desc:"你敢于梦想，不惧失败。纳瓦尔说如果你不持有观点，别人会替你决定，你坚持自己的人生叙事，不随波逐流。", quote:"If you don't know what you're doing, someone else will."},
+        {id:7, name:"内修型", desc:"你注重内在成长和自我完善。纳瓦尔说幸福是一种技能，你通过冥想、阅读、反思来修炼内心平静。", quote:"Happiness is a skill that can be developed."},
+        {id:8, name:"享受型", desc:"你懂得享受生活的美好。纳瓦尔说钱买不到幸福，但能买到自由，你相信及时行乐，享受当下的每一刻。", quote:"Play and rest are important too."},
+        {id:9, name:"关系型", desc:"你重视人际关系和连接。纳瓦尔说和长期的人玩长期游戏，你相信人脉是最重要的资产，善于建立深度关系。", quote:"Play long-term games with long-term people."},
+        {id:10, name:"稳健型", desc:"你追求稳定和安全感。纳瓦尔说承担风险，但你更倾向于稳健前行，注重风险控制和长期规划。", quote:"Take risk, but do it methodically."},
+        {id:11, name:"技能型", desc:"你相信专业主义。纳瓦尔说specific knowledge无法被教导，你追求在某个领域成为专家，这是你的核心竞争力。", quote:"Arm yourself with specific knowledge."},
+        {id:12, name:"声望型", desc:"你渴望获得社会认可和地位。纳瓦尔说status是零和游戏，但你仍追求在自己的圈子里获得尊重和影响力。", quote:"Status is a very old game."},
+        {id:13, name:"企业型", desc:"你有强烈的创业精神。纳瓦尔说从0到1，你不满足于执行别人的想法，渴望创建自己的组织和事业。", quote:"Escape competition through authenticity."},
+        {id:14, name:"赚钱型", desc:"你热爱商业和财富创造。纳瓦尔说wealth是睡觉时也在赚钱的资产，你对商业机会敏感，追求财务自由。", quote:"Wealth is assets that earn while you sleep."},
+        {id:15, name:"权力型", desc:"你渴望影响力和控制力。纳瓦尔说权力来自于被需要，你希望在自己的领域拥有话语权和决策权。", quote:"Power comes from being needed."}
     ];
     
-    // 20道题目，每题4个选项对应16种类型（循环分配）
     var questions = [
-        {q:"纳瓦尔说："If you don't know what you're doing, someone else will decide it for you." 你目前的困惑是？", o:[
-            {t:"作品型", a:"我不知道该创造什么来留下痕迹"},
-            {t:"体验型", a:"我不知道该如何体验更多"},
-            {t:"成就型", a:"我不知道如何成功"},
-            {t:"追梦型", a:"我不敢追求真正的梦想"}
-        ]},
-        {q:""Escape competition through authenticity"——你如何理解这句话？", o:[
-            {t:"作品型", a:"做真实的自己，不需要竞争"},
-            {t:"企业型", a:"找到没人做的细分领域"},
-            {t:"理念型", a:"追随内心，不随大流"},
-            {t:"技能型", a:"发挥自己独特的专长"}
-        ]},
-        {q:"什么样的工作让你觉得"这才是我该做的"？", o:[
-            {t:"作品型", a:"创造一些世界上不存在的东西"},
-            {t:"体验型", a:"每天都有新鲜感和挑战"},
-            {t:"技能型", a:"解决复杂专业问题"},
-            {t:"企业型", a:"带领团队完成目标"}
-        ]},
-        {q:"如果你财务自由了，你还会做什么？", o:[
-            {t:"作品型", a:"继续创作，因为热爱"},
-            {t:"体验型", a:"环游世界，体验不同文化"},
-            {t:"公益型", a:"做慈善帮助他人"},
-            {t:"内修型", a:"冥想、阅读、修行"}
-        ]},
-        {q:"纳瓦尔说"和长期的人玩长期游戏"，你最认同？", o:[
-            {t:"关系型", a:"和靠谱的人建立深度关系"},
-            {t:"稳健型", a:"长期规划，稳健前行"},
-            {t:"技能型", a:"在一个领域深耕多年"},
-            {t:"企业型", a:"建立长期有价值的公司"}
-        ]},
-        {q:"你更容易对什么感到焦虑？", o:[
-            {t:"声望型", a:"在竞争中落后于别人"},
-            {t:"稳健型", a:"投资失败或财务风险"},
-            {t:"成就型", a:"无法达成既定目标"},
-            {t:"追梦型", a:"想法无法落地实现"}
-        ]},
-        {q:"纳瓦尔强调"specific knowledge"（特定知识），你的优势是？", o:[
-            {t:"技能型", a:"多年实践经验积累的技能"},
-            {t:"理念型", a:"独立思考和判断能力"},
-            {t:"企业型", a:"对商业和人的直觉"},
-            {t:"启发型", a:"把知识传递给他人"}
-        ]},
-        {q:"你更愿意成为什么样的人？", o:[
-            {t:"作品型", a:"留下传世作品的人"},
-            {t:"声望型", a:"被尊敬的专业人士"},
-            {t:"企业型", a:"创建伟大公司的人"},
-            {t:"启发型", a:"启发他人成长的人"}
-        ]},
-        {q:"纳瓦尔说"Learn to sell, learn to build"，你最想加强哪个？", o:[
-            {t:"作品型", a:"构建——做出产品/作品"},
-            {t:"关系型", a:"销售——链接人和资源"},
-            {t:"赚钱型", a:"商业——发现机会"},
-            {t:"技能型", a:"先构建，再销售"}
-        ]},
-        {q:"你对"财富"的定义是？", o:[
-            {t:"赚钱型", a:"能够产生现金流的资产"},
-            {t:"自由型", a:"时间自由，想做什么就做什么"},
-            {t:"稳健型", a:"足够的储蓄和安全感"},
-            {t:"享受型", a:"能够享受生活的资源"}
-        ]},
-        {q:"面对风险，你的态度是？", o:[
-            {t:"企业型", a:"敢于冒险，抓住机会"},
-            {t:"稳健型", a:"谨慎评估，控制风险"},
-            {t:"追梦型", a:"不计后果，博一把"},
-            {t:"体验型", a:"把风险当成体验"}
-        ]},
-        {q:"你如何处理失败？", o:[
-            {t:"作品型", a:"把失败写成教训"},
-            {t:"体验型", a:"把它当作成长经历"},
-            {t:"内修型", a:"接纳并放下"},
-            {t:"企业型", a:"总结经验再来"}
-        ]},
-        {q:"你最大的快乐来自？", o:[
-            {t:"启发型", a:"看到别人因我成长"},
-            {t:"关系型", a:"和爱的人在一起"},
-            {t:"公益型", a:"帮助需要帮助的人"},
-            {t:"享受型", a:"美食、旅行、休闲"}
-        ]},
-        {q:"纳瓦尔说"幸福是一种技能"，你认同吗？", o:[
-            {t:"内修型", a:"完全认同，需要修炼"},
-            {t:"理念型", a:"认同，但需要理性思考"},
-            {t:"享受型", a:"幸福就是及时行乐"},
-            {t:"公益型", a:"幸福来自给予"}
-        ]},
-        {q:"你对"成功"的定义是？", o:[
-            {t:"成就型", a:"在领域内做到顶尖"},
-            {t:"声望型", a:"获得社会认可"},
-            {t:"企业型", a:"创建有影响力的组织"},
-            {t:"作品型", a:"留下有价值的作品"}
-        ]},
-        {q:"你如何规划自己的时间？", o:[
-            {t:"技能型", a:"大量时间用于精进技能"},
-            {t:"关系型", a:"优先维护人脉关系"},
-            {t:"体验型", a:"留出时间体验生活"},
-            {t:"内修型", a:"每天留出反思时间"}
-        ]},
-        {q:"你最看重什么价值观？", o:[
-            {t:"理念型", a:"真实、理性、独立思考"},
-            {t:"公益型", a:"善良、同理心、奉献"},
-            {t:"成就型", a:"卓越、执行力、结果"},
-            {t:"作品型", a:"创造力、独特性、永恒"}
-        ]},
-        {q:"如果只能选一个，你会选择？", o:[
-            {t:"赚钱型", a:"很多钱"},
-            {t:"权力型", a:"很大权力"},
-            {t:"声望型", a:"很高声望"},
-            {t:"自由型", a:"完全自由"}
-        ]},
-        {q:"纳瓦尔说"玩长期游戏"，你认为最重要的是？", o:[
-            {t:"关系型", a:"选择对的人"},
-            {t:"稳健型", a:"持续稳定"},
-            {t:"技能型", a:"不断提升"},
-            {t:"作品型", a:"积累价值"}
-        ]},
-        {q:"最后一道：你人生的核心追求是？", o:[
-            {t:"作品型", a:"创造有价值的东西"},
-            {t:"体验型", a:"经历丰富的人生"},
-            {t:"公益型", a:"让世界更美好"},
-            {t:"内修型", a:"获得内心平静"}
-        ]}
+        {q:"纳瓦尔说：If you don't know what you're doing, someone else will decide it for you. 你目前的困惑是？", o:[{t:0,a:"我不知道该创造什么来留下痕迹"},{t:1,a:"我不知道该如何体验更多"},{t:3,a:"我不知道如何成功"},{t:6,a:"我不敢追求真正的梦想"}]},
+        {q:"Escape competition through authenticity——你如何理解这句话？", o:[{t:0,a:"做真实的自己，不需要竞争"},{t:13,a:"找到没人做的细分领域"},{t:5,a:"追随内心，不随大流"},{t:11,a:"发挥自己独特的专长"}]},
+        {q:"什么样的工作让你觉得这是我才该做的？", o:[{t:0,a:"创造一些世界上不存在的东西"},{t:1,a:"每天都有新鲜感和挑战"},{t:11,a:"解决复杂专业问题"},{t:13,a:"带领团队完成目标"}]},
+        {q:"如果你财务自由了，你还会做什么？", o:[{t:0,a:"继续创作，因为热爱"},{t:1,a:"环游世界，体验不同文化"},{t:2,a:"做慈善帮助他人"},{t:7,a:"冥想、阅读、修行"}]},
+        {q:"纳瓦尔说和长期的人玩长期游戏，你最认同？", o:[{t:9,a:"和靠谱的人建立深度关系"},{t:10,a:"长期规划，稳健前行"},{t:11,a:"在一个领域深耕多年"},{t:13,a:"建立长期有价值的公司"}]},
+        {q:"你更容易对什么感到焦虑？", o:[{t:12,a:"在竞争中落后于别人"},{t:10,a:"投资失败或财务风险"},{t:3,a:"无法达成既定目标"},{t:6,a:"想法无法落地实现"}]},
+        {q:"纳瓦尔强调specific knowledge（特定知识），你的优势是？", o:[{t:11,a:"多年实践经验积累的技能"},{t:5,a:"独立思考和判断能力"},{t:13,a:"对商业和人的直觉"},{t:4,a:"把知识传递给他人"}]},
+        {q:"你更愿意成为什么样的人？", o:[{t:0,a:"留下传世作品的人"},{t:12,a:"被尊敬的专业人士"},{t:13,a:"创建伟大公司的人"},{t:4,a:"启发他人成长的人"}]},
+        {q:"纳瓦尔说Learn to sell, learn to build，你最想加强哪个？", o:[{t:0,a:"构建——做出产品/作品"},{t:9,a:"销售——链接人和资源"},{t:14,a:"商业——发现机会"},{t:11,a:"先构建，再销售"}]},
+        {q:"你对财富的定义是？", o:[{t:14,a:"能够产生现金流的资产"},{t:9,a:"时间自由，想做什么就做什么"},{t:10,a:"足够的储蓄和安全感"},{t:8,a:"能够享受生活的资源"}]},
+        {q:"面对风险，你的态度是？", o:[{t:13,a:"敢于冒险，抓住机会"},{t:10,a:"谨慎评估，控制风险"},{t:6,a:"不计后果，博一把"},{t:1,a:"把风险当成体验"}]},
+        {q:"你如何处理失败？", o:[{t:0,a:"把失败写成教训"},{t:1,a:"把它当作成长经历"},{t:7,a:"接纳并放下"},{t:13,a:"总结经验再来"}]},
+        {q:"你最大的快乐来自？", o:[{t:4,a:"看到别人因我成长"},{t:9,a:"和爱的人在一起"},{t:2,a:"帮助需要帮助的人"},{t:8,a:"美食、旅行、休闲"}]},
+        {q:"纳瓦尔说幸福是一种技能，你认同吗？", o:[{t:7,a:"完全认同，需要修炼"},{t:5,a:"认同，但需要理性思考"},{t:8,a:"幸福就是及时行乐"},{t:2,a:"幸福来自给予"}]},
+        {q:"你对成功的定义是？", o:[{t:3,a:"在领域内做到顶尖"},{t:12,a:"获得社会认可"},{t:13,a:"创建有影响力的组织"},{t:0,a:"留下有价值的作品"}]},
+        {q:"你如何规划自己的时间？", o:[{t:11,a:"大量时间用于精进技能"},{t:9,a:"优先维护人脉关系"},{t:1,a:"留出时间体验生活"},{t:7,a:"每天留出反思时间"}]},
+        {q:"你最看重什么价值观？", o:[{t:5,a:"真实、理性、独立思考"},{t:2,a:"善良、同理心、奉献"},{t:3,a:"卓越、执行力、结果"},{t:0,a:"创造力、独特性、永恒"}]},
+        {q:"如果只能选一个，你会选择？", o:[{t:14,a:"很多钱"},{t:15,a:"很大权力"},{t:12,a:"很高声望"},{t:9,a:"完全自由"}]},
+        {q:"纳瓦尔说玩长期游戏，你认为最重要的是？", o:[{t:9,a:"选择对的人"},{t:10,a:"持续稳定"},{t:11,a:"不断提升"},{t:0,a:"积累价值"}]},
+        {q:"最后一道：你人生的核心追求是？", o:[{t:0,a:"创造有价值的东西"},{t:1,a:"经历丰富的人生"},{t:2,a:"让世界更美好"},{t:7,a:"获得内心平静"}]}
     ];
     
     function start() {
@@ -376,27 +164,21 @@
         document.getElementById('page2').classList.add('hidden');
         document.getElementById('page3').classList.remove('hidden');
         
-        // 统计得分
         var counts = {};
-        answers.forEach(function(t) {
-            counts[t] = (counts[t] || 0) + 1;
-        });
+        answers.forEach(function(t) { counts[t] = (counts[t] || 0) + 1; });
         
-        // 排序
         var sorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]});
         
-        // 找到结果类型
-        var topType = types.find(function(t){return t.id === sorted[0]});
+        var topType = types[sorted[0]];
         
         document.getElementById('resultTitle').innerText = topType.name;
         document.getElementById('resultDesc').innerText = topType.desc;
-        document.getElementById('resultQuote').innerText = topType.quote;
+        document.getElementById('resultQuote').innerText = '"' + topType.quote + '"';
         
-        // 显示其他类型
         var grid = document.getElementById('typesGrid');
         grid.innerHTML = '';
         sorted.slice(1, 9).forEach(function(tid) {
-            var t = types.find(function(x){return x.id === tid});
+            var t = types[tid];
             var div = document.createElement('div');
             div.className = 'type-item';
             div.innerText = t.name + ' (' + counts[tid] + ')';
