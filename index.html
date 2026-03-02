@@ -1,607 +1,116 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>纳瓦尔：找到你天生该走的路 v2</title>
+    <title>纳瓦尔测评</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-        }
-        
-        .quote {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .quote-text {
-            font-size: 16px;
-            line-height: 1.8;
-            font-style: italic;
-        }
-        .quote-author {
-            margin-top: 12px;
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            color: #1a1a2e;
-            font-size: 26px;
-            margin-bottom: 8px;
-        }
-        .header p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .intro {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .intro-icon {
-            font-size: 56px;
-            margin-bottom: 15px;
-        }
-        .intro h2 {
-            color: #333;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        .intro p {
-            color: #666;
-            line-height: 1.8;
-            font-size: 14px;
-            text-align: left;
-            margin-bottom: 15px;
-        }
-        
-        .naval-point {
-            background: #f8f9ff;
-            border-radius: 12px;
-            padding: 16px;
-            margin: 15px 0;
-            text-align: left;
-        }
-        .naval-point strong {
-            color: #667eea;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .naval-point p {
-            color: #666;
-            font-size: 13px;
-            margin: 0;
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 16px 40px;
-            font-size: 16px;
-            border-radius: 12px;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.2s;
-            margin-top: 20px;
-        }
-        .btn:hover { transform: translateY(-2px); }
-        
-        /* 测评页面 */
-        #quizPage { display: none; }
-        .progress {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        .progress-bar {
-            flex: 1;
-            height: 6px;
-            background: #eee;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            transition: width 0.3s;
-        }
-        .progress-text {
-            margin-left: 12px;
-            color: #999;
-            font-size: 13px;
-        }
-        
-        .question {
-            margin-bottom: 25px;
-        }
-        .question-num {
-            color: #667eea;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .question-text {
-            color: #333;
-            font-size: 17px;
-            line-height: 1.6;
-            margin-bottom: 18px;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .option {
-            padding: 14px 16px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-            color: #444;
-            line-height: 1.5;
-        }
-        .option:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
-        }
-        .option.selected {
-            border-color: #667eea;
-            background: #f0f3ff;
-        }
-        
-        /* 结果页面 */
-        #resultPage { display: none; }
-        .result-header {
-            text-align: center;
-            padding: 15px 0;
-        }
-        .result-icon {
-            font-size: 56px;
-            margin-bottom: 12px;
-        }
-        .result-type {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 28px;
-            font-weight: 700;
-        }
-        .result-tagline {
-            color: #666;
-            font-size: 15px;
-            margin-top: 8px;
-        }
-        
-        .result-quote {
-            background: linear-gradient(135deg, #1a1a2e, #302b63);
-            color: white;
-            padding: 20px;
-            border-radius: 14px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .result-quote p {
-            font-size: 14px;
-            line-height: 1.7;
-            font-style: italic;
-        }
-        
-        .result-section {
-            margin-top: 20px;
-        }
-        .result-section h3 {
-            color: #333;
-            font-size: 15px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .result-section p {
-            color: #666;
-            line-height: 1.8;
-            font-size: 14px;
-        }
-        
-        .result-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
-        }
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-        }
-        
-        .share-tip {
-            text-align: center;
-            margin-top: 15px;
-            color: #999;
-            font-size: 12px;
-        }
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; background: #1a1a2e; color: white; min-height: 100vh; }
+        .container { background: white; color: #333; padding: 30px; border-radius: 20px; }
+        h1 { text-align: center; }
+        button { width: 100%; padding: 15px; font-size: 18px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 10px; cursor: pointer; margin: 10px 0; }
+        button:hover { transform: translateY(-2px); }
+        .hidden { display: none; }
+        .option { padding: 15px; border: 2px solid #ddd; margin: 8px 0; border-radius: 10px; cursor: pointer; }
+        .option:hover { border-color: #667eea; background: #f8f9ff; }
+        .option.selected { border-color: #667eea; background: #e8ecff; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 首页 -->
-        <div id="introPage">
-            <div class="quote">
-                <p class="quote-text">"If you don't know what you're doing, someone else will decide it for you."</p>
-                <p class="quote-author">— Naval Ravikant</p>
-            </div>
-            
-            <div class="header">
-                <h1>🧭 纳瓦尔人生定位测评</h1>
-                <p>找到你"天生该吃的饭"</p>
-            </div>
-            
-            <div class="intro">
-                <div class="intro-icon">💫</div>
-                
-                <h2>你走在正确的路上吗？</h2>
-                
-                <p>纳瓦尔说："真正能让你变得富有和自由的事情，往往是你做起来比别人轻松，却比别人做得好的事情。"</p>
-                
-                <div class="naval-point">
-                    <strong>🎯 纳瓦尔第一法则：Escape competition through authenticity</strong>
-                    <p>靠竞争无法获胜，靠做真实的自己才能逃离竞争。当你能做真正的自己时，竞争自动消失。</p>
-                </div>
-                
-                <div class="naval-point">
-                    <strong>🎯 纳瓦尔第二法则：Play long-term games</strong>
-                    <p>和长期的人玩长期游戏。但前提是，你得知道自己想赢的是哪一场长期游戏。</p>
-                </div>
-                
-                <div class="naval-point">
-                    <strong>🎯 核心问题</strong>
-                    <p>不是"我适合什么工作"，而是"我在为什么而活"——什么是我即使无人喝彩也愿意长期做的事？</p>
-                </div>
-                
-                <p>通过10道题，帮你找到你的人生定位类型</p>
-                
-                <button class="btn" id="startBtn">开始测评</button>
-            </div>
-        </div>
-        
-        <!-- 测评页面 -->
-        <div id="quizPage">
-            <div class="progress">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <span class="progress-text" id="progressText">1/10</span>
-            </div>
-            
-            <div class="question" id="question"></div>
-            
-            <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>下一题</button>
-        </div>
-        
-        <!-- 结果页面 -->
-        <div id="resultPage">
-            <div class="result-header">
-                <div class="result-icon" id="resultIcon">🎯</div>
-                <div class="result-type" id="resultType">你是创造者型</div>
-                <div class="result-tagline" id="resultTagline">你天生该吃这碗饭</div>
-            </div>
-            
-            <div class="result-quote">
-                <p id="navalQuote">"Escape competition through authenticity."</p>
-            </div>
-            
-            <div class="result-section">
-                <h3>📊 你的核心特质</h3>
-                <p id="coreTrait"></p>
-            </div>
-            
-            <div class="result-section">
-                <h3>💡 为什么这适合你</h3>
-                <p id="whyFit"></p>
-            </div>
-            
-            <div class="result-section">
-                <h3>⚠️ 警惕陷阱</h3>
-                <p id="warning"></p>
-            </div>
-            
-            <div class="result-section">
-                <h3>🚀 行动建议</h3>
-                <p id="action"></p>
-            </div>
-            
-            <div class="result-actions">
-                <button class="btn" onclick="shareResult()">分享结果</button>
-                <button class="btn btn-secondary" onclick="restartQuiz()">重新测评</button>
-            </div>
-            
-            <p class="share-tip">点击"分享结果"可复制文字分享</p>
-        </div>
+    <div class="container" id="page1">
+        <h1>🎯 纳瓦尔人生定位测评</h1>
+        <p style="text-align:center;color:#666;margin:20px 0;">"If you don't know what you're doing, someone else will decide it for you."</p>
+        <p>通过10道题，找到你天生该走的路</p>
+        <button onclick="start()">开始测评</button>
+    </div>
+    
+    <div class="container hidden" id="page2">
+        <h2 id="qtitle">第1题</h2>
+        <div id="options"></div>
+        <button id="nextBtn" onclick="next()" disabled>下一题</button>
+    </div>
+    
+    <div class="container hidden" id="page3">
+        <h2 id="resultTitle">结果</h2>
+        <p id="resultDesc"></p>
+        <button onclick="location.reload()">重新测评</button>
     </div>
 
     <script>
-        const types = {
-            '创造者': {
-                tagline: '通过创作留下独特影响',
-                quote: 'The goal is to find people who are going to take a long-term view, who understand that you\'re doing something hard.',
-                coreTrait: '你有强烈的创造欲望，渴望通过你的作品（文字、艺术、产品、思想）在这个世界上留下独特的印记。你对创造的过程充满热情，即使没有立即的回报也愿意坚持下去。',
-                whyFit: '纳瓦尔说"escape competition through authenticity"——当你做真正的自己时，竞争自动消失。你的创造力是你最真实的表达，做你热爱的事本身就是最好的竞争力。',
-                warning: '警惕：不要为了迎合市场而牺牲真实表达。短期迎合可能有效，但长期你会失去热情。记住：真正独特的东西才有长期价值。',
-                action: '每天留出时间创作，不为变现，只为表达。找到一个你想长期耕耘的领域，持续输出。'
-            },
-            '投资者': {
-                tagline: '让资本为你工作',
-                quote: 'Make bets on people instead of ideas.',
-                coreTrait: '你对数字敏感，善于分析，明白"让钱为你工作"的道理。你喜欢思考长期收益，愿意为了更大的回报延迟满足。',
-                whyFit: '纳瓦尔强调"ownership"——拥有某样东西（股权、房产、智力资产）比单纯出卖时间更接近财富自由。投资者型的核心是理解复利和资本的力量。',
-                warning: '警惕：不要陷入"只存钱不投资"的陷阱。钱不投资就会贬值。同时避免过度冒险——理解"聪明地冒险"vs"愚蠢地冒险"的区别。',
-                action: '学习基础的财务知识，开始小额投资。关注能产生现金流的资产，而非单纯消耗的东西。'
-            },
-            '企业家': {
-                tagline: '创建系统，创造就业',
-                quote: 'Build something people want, and charge for it.',
-                coreTrait: '你有强烈的掌控欲和创建欲，不满足于执行别人的想法。你喜欢从0到1的过程，享受带领团队和解决复杂问题的挑战。',
-                whyFit: '纳瓦尔说"the best jobs are neither Gatekeepers or Diggers"—最好的是创建者。企业家精神让你能够杠杆他人的时间和资本，实现规模化影响。',
-                warning: '警惕：不要为了"当老板"而创业。真正的企业家精神是解决问题，不是享受权力。确保你在解决一个真实的问题，而非臆想的需求。',
-                action: '从小的"创业实验"开始——用最小成本验证一个想法。找到你领域内最优秀的人合作，玩长期游戏。'
-            },
-            '专家': {
-                tagline: '在细分领域做到极致',
-                quote: 'Become the best in the world at what you do.',
-                coreTrait: '你崇尚专业主义，相信"打铁还需自身硬"。你愿意在一个领域持续深耕，追求极致的专业能力。',
-                whyFit: '纳瓦尔强调"specific knowledge"——无法被教授、只能在实践中获得的独特能力。找到你愿意长期精进的领域，成为世界级专家。',
-                warning: '警惕：不要为了"专业"而钻牛角尖。专业最终要能为他人创造价值。确保你的专长有市场需求，而非自嗨。',
-                action: '找到一个你有天赋且热爱的细分领域，每天精进一点点。输出你的专业，建立个人品牌。'
-            },
-            '连接者': {
-                tagline: '链接人与资源',
-                quote: 'Learn to sell, learn to build.',
-                coreTrait: '你善于人际交往，喜欢把对的人链接到对的事情上。你不一定是某个领域的专家，但你能让专家们一起工作。',
-                whyFit: '纳瓦尔说"the most important skill is to sell"—连接者的核心是理解供需，能够把价值从一个人手中传递到另一个人手中。',
-                warning: '警惕：不要变成纯粹的"中间人"。没有真实价值的连接终将瓦解。确保你也在创造某些价值，而非只是牵线搭桥。',
-                action: '主动组织小型的交流活动。找到你欣赏的人，创造让他们合作的机会。'
-            },
-            '教育者': {
-                tagline: '启发他人，传承智慧',
-                quote: 'The most important thing is to be able to think for yourself.',
-                coreTrait: '你有强烈的分享欲和教育欲，看到别人成长会让你感到满足。你善于把复杂的事情讲清楚，喜欢启发他人的思考。',
-                whyFit: '纳瓦尔说"The goal is to be a teacher"—教育的本质是帮助他人独立思考。教育者通过启发他人来创造涟漪般的影响。',
-                warning: '警惕：不要变成"灌输者"。好的教育是启发思考，而非灌输答案。让你的学生独立，而不是依赖你。',
-                action: '开始写作或制作内容，分享你的知识和见解。找到愿意学习的人，提供指导。'
-            },
-            '探索者': {
-                tagline: '在体验中寻找意义',
-                quote: 'Experience is something you get when you don\'t get what you want.',
-                coreTrait: '你热爱体验，相信"没有白走的路"。你喜欢探索未知，经历丰富多样的人生体验对你来说就是最大的财富。',
-                whyFit: '纳瓦尔说人生是"rational optimism"——理性乐观地面对不确定。探索者型的核心是在体验中学习，保持开放和好奇。',
-                warning: '警惕：不要变成"永远在准备"的拖延症。探索需要行动，而非只是想象。设定边界，避免无止境的"下一个会更好"。',
-                action: '列一个"体验清单"，挑一个马上去做。不要等到"完美时机"，时机就是现在。'
-            },
-            '服务者': {
-                tagline: '通过服务改善他人生活',
-                quote: 'The most ethical way to become wealthy is to make society wealthier.',
-                coreTrait: '你有强烈的同理心和助人愿望，看到别人因你的帮助而变好是你最大的满足。你愿意服务他人，创造积极的社会影响。',
-                whyFit: '纳瓦尔强调"make society wealthier"——最道德的致富方式是让社会变得更富有。服务者的核心是为他人创造价值，这是商业的本质。',
-                warning: '警惕：不要牺牲自己成全他人。真正的服务是可持续的，不是自我消耗。设定健康的边界。',
-                action: '找到你能服务的具体人群，从小事做起。持续关注你的服务对象真正需要什么。'
-            }
-        };
-        
-        const questions = [
-            {
-                question: '纳瓦尔说："If you don't know what you\'re doing, someone else will decide it for you." 你目前的困惑是？',
-                options: [
-                    { text: '我不知道自己擅长什么，感觉什么都能做一点', type: '探索者' },
-                    { text: '我在做一份稳定工作，但不确定是不是想要的', type: '探索者' },
-                    { text: '我有想法但不知道能否成功，害怕选错', type: '企业家' },
-                    { text: '我想赚钱但不知道做什么，有存款但不敢投', type: '投资者' }
-                ]
-            },
-            {
-                question: '"Escape competition through authenticity"——你理解这句话吗？',
-                options: [
-                    { text: '做真实的自己，不用跟别人比较', type: '创造者' },
-                    { text: '找到没人做的细分领域', type: '专家' },
-                    { text: '与其竞争，不如创造新市场', type: '企业家' },
-                    { text: '不太理解，但我想找到不费力的优势', type: '探索者' }
-                ]
-            },
-            {
-                question: '什么样的工作让你觉得"这才是我该做的"？',
-                options: [
-                    { text: '创造一些世界上不存在的东西', type: '创造者' },
-                    { text: '解决复杂问题，带领团队达成目标', type: '企业家' },
-                    { text: '在某个领域成为顶尖专家', type: '专家' },
-                    { text: '帮助别人解决问题，看到他们变好', type: '服务者' }
-                ]
-            },
-            {
-                question: '如果你财务自由了，你还会做什么？',
-                options: [
-                    { text: '继续做现在的事，因为热爱', type: '创造者' },
-                    { text: '开始自己的创业项目', type: '企业家' },
-                    { text: '投资更多有潜力的公司/项目', type: '投资者' },
-                    { text: '去体验不同的人生', type: '探索者' }
-                ]
-            },
-            {
-                question: '纳瓦尔说"Play long-term games with long-term people"，你更认同？',
-                options: [
-                    { text: '找到一个领域，长期深耕', type: '专家' },
-                    { text: '和靠谱的人一起做大事', type: '企业家' },
-                    { text: '建立长期有价值的作品/产品', type: '创造者' },
-                    { text: '建立深度持久的人际关系', type: '连接者' }
-                ]
-            },
-            {
-                question: '你更容易对什么感到焦虑？',
-                options: [
-                    { text: '在竞争中落后于别人', type: '专家' },
-                    { text: '错过好的投资机会', type: '投资者' },
-                    { text: '想法无法落地实现', type: '企业家' },
-                    { text: '无法创造有价值的东西', type: '创造者' }
-                ]
-            },
-            {
-                question: '纳瓦尔强调"specific knowledge"（无法被教授的知识），你最有可能是？',
-                options: [
-                    { text: '通过多年实践经验积累的技能', type: '专家' },
-                    { text: '对商业和人的直觉判断', type: '连接者' },
-                    { text: '独特的创造力和审美', type: '创造者' },
-                    { text: '对数字和趋势的敏感', type: '投资者' }
-                ]
-            },
-            {
-                question: '你更愿意成为什么样的人？',
-                options: [
-                    { text: '一个创造者，留下被记住的作品', type: '创造者' },
-                    { text: '一个专家，在领域内被尊敬', type: '专家' },
-                    { text: '一个企业家，创造就业和价值', type: '企业家' },
-                    { text: '一个投资者，聪明地配置资源', type: '投资者' }
-                ]
-            },
-            {
-                question: '如果有人要你描述自己的核心优势，你会说？',
-                options: [
-                    { text: '我善于发现机会并整合资源', type: '连接者' },
-                    { text: '我善于把复杂事情讲清楚', type: '教育者' },
-                    { text: '我有很强的学习能力和好奇心', type: '探索者' },
-                    { text: '我善于发现并解决问题', type: '企业家' }
-                ]
-            },
-            {
-                question: '最后一道题：纳瓦尔说"Learn to sell, learn to build"，你最想加强哪个？',
-                options: [
-                    { text: '构建（Building）— 做出产品/作品', type: '创造者' },
-                    { text: '销售（Selling）— 链接人和资源', type: '连接者' },
-                    { text: '我都需要加强', type: '企业家' },
-                    { text: '先构建，再销售', type: '专家' }
-                ]
-            }
-        ];
-        
-        let currentQuestion = 0;
-        let answers = {};
-        
-        function startQuiz() {
-            document.getElementById('introPage').style.display = 'none';
-            document.getElementById('quizPage').style.display = 'block';
-            showQuestion();
-        }
-        
-        function showQuestion() {
-            const q = questions[currentQuestion];
-            const questionEl = document.getElementById('question');
-            questionEl.innerHTML = `
-                <div class="question-num">第 ${currentQuestion + 1} 题</div>
-                <div class="question-text">${q.question}</div>
-                <div class="options">
-                    ${q.options.map((opt, i) => `
-                        <div class="option" onclick="selectOption(${i})">${opt.text}</div>
-                    `).join('')}
-                </div>
-            `;
-            
-            document.getElementById('progressFill').style.width = `${(currentQuestion / questions.length) * 100}%`;
-            document.getElementById('progressText').textContent = `${currentQuestion + 1}/${questions.length}`;
-            document.getElementById('nextBtn').disabled = true;
-            document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? '查看结果' : '下一题';
-        }
-        
-        function selectOption(index) {
-            const q = questions[currentQuestion];
-            answers[currentQuestion] = q.options[index].type;
-            
-            document.querySelectorAll('.option').forEach((el, i) => {
-                el.classList.toggle('selected', i === index);
-            });
-            
-            document.getElementById('nextBtn').disabled = false;
-        }
-        
-        function nextQuestion() {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                showQuestion();
-            } else {
-                showResult();
-            }
-        }
-        
-        function showResult() {
-            const counts = {};
-            Object.values(answers).forEach(type => {
-                counts[type] = (counts[type] || 0) + 1;
-            });
-            
-            const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-            const topType = sorted[0][0];
-            const typeInfo = types[topType];
-            
-            document.getElementById('quizPage').style.display = 'none';
-            document.getElementById('resultPage').style.display = 'block';
-            
-            const icons = {'创造者':'🎨','投资者':'💰','企业家':'🏢','专家':'🔧','连接者':'🤝','教育者':'📚','探索者':'🌟','服务者':'💝'};
-            
-            document.getElementById('resultIcon').textContent = icons[topType] || '🎯';
-            document.getElementById('resultType').textContent = `你是${topType}型`;
-            document.getElementById('resultTagline').textContent = typeInfo.tagline;
-            document.getElementById('navalQuote').textContent = `"${typeInfo.quote}"`;
-            document.getElementById('coreTrait').textContent = typeInfo.coreTrait;
-            document.getElementById('whyFit').textContent = typeInfo.whyFit;
-            document.getElementById('warning').textContent = typeInfo.warning;
-            document.getElementById('action').textContent = typeInfo.action;
-        }
-        
-        function shareResult() {
-            const type = document.getElementById('resultType').textContent;
-            const tagline = document.getElementById('resultTagline').textContent;
-            const quote = document.getElementById('navalQuote').textContent;
-            const trait = document.getElementById('coreTrait').textContent;
-            const action = document.getElementById('action').textContent;
-            
-            const text = `🎯 ${type}\n\n${tagline}\n\n${quote}\n\n📊 ${trait}\n\n🚀 ${action}\n\n🔗 测试链接：${window.location.href}`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                alert('已复制到剪贴板！');
-            });
-        }
-        
-        function restartQuiz() {
-            currentQuestion = 0;
-            answers = {};
-            document.getElementById('resultPage').style.display = 'none';
-            document.getElementById('introPage').style.display = 'block';
-        }
-        
-        // 确保按钮点击有效
-        document.getElementById('startBtn').addEventListener('click', function() {
-            startQuiz();
+    var current = 0;
+    var answers = [];
+    
+    var questions = [
+        {q:"纳瓦尔说：如果你不知道自己在做什么，别人会替你决定。你的困惑是？",o:["我不知道擅长什么","在做稳定工作但不确定想要什么","有想法但不知道能否成功","想赚钱但不知道做什么"]},
+        {q:"\"Escape competition through authenticity\" - 你理解这句话吗？",o:["做真实的自己，不用跟别人比较","找到没人做的细分领域","与其竞争，不如创造新市场","不太理解，想找到不费力的优势"]},
+        {q:"什么样的工作让你觉得\"这才是我该做的\"？",o:["创造一些世界上不存在的东西","解决复杂问题带领团队","在某个领域成为顶尖专家","帮助别人解决问题"]},
+        {q:"如果你财务自由了，你还会做什么？",o:["继续做现在的事，因为热爱","开始自己的创业项目","投资更多有潜力的项目","去体验不同的人生"]},
+        {q:"纳瓦尔说\"和长期的人玩长期游戏\"，你更认同？",o:["找到一个领域，长期深耕","和靠谱的人一起做大事","建立长期有价值的作品","建立深度持久的人际关系"]},
+        {q:"你更容易对什么感到焦虑？",o:["在竞争中落后于别人","错过好的投资机会","想法无法落地实现","无法创造有价值的东西"]},
+        {q:"纳瓦尔强调\"specific knowledge\"，你最有可能是？",o:["通过多年实践经验积累的技能","对商业和人的直觉判断","独特的创造力和审美","对数字和趋势的敏感"]},
+        {q:"你更愿意成为什么样的人？",o:["一个创造者，留下作品","一个专家，在领域内被尊敬","一个企业家，创造就业","一个投资者，聪明配置资源"]},
+        {q:"如果有人要你描述自己的核心优势，你会说？",o:["我善于发现机会并整合资源","我善于把复杂事情讲清楚","我有很强的学习能力和好奇心","我善于发现并解决问题"]},
+        {q:"最后一道：纳瓦尔说\"Learn to sell, learn to build\"，你最想加强哪个？",o:["构建 - 做出产品/作品","销售 - 链接人和资源","我都需要加强","先构建，再销售"]}
+    ];
+    
+    var types = [
+        "创造者","探索者","企业家","投资者",
+        "专家","连接者","教育者","服务者"
+    ];
+    
+    function start() {
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('page2').classList.remove('hidden');
+        showQ();
+    }
+    
+    function showQ() {
+        document.getElementById('qtitle').innerText = '第'+(current+1)+'题';
+        var opts = document.getElementById('options');
+        opts.innerHTML = '';
+        questions[current].o.forEach(function(t,i) {
+            var d = document.createElement('div');
+            d.className = 'option';
+            d.innerText = t;
+            d.onclick = function() {
+                document.querySelectorAll('.option').forEach(function(x){x.classList.remove('selected')});
+                this.classList.add('selected');
+                answers[current] = i;
+                document.getElementById('nextBtn').disabled = false;
+            };
+            opts.appendChild(d);
         });
+        document.getElementById('nextBtn').innerText = current==9?'查看结果':'下一题';
+    }
+    
+    function next() {
+        if (current < 9) {
+            current++;
+            showQ();
+        } else {
+            showResult();
+        }
+    }
+    
+    function showResult() {
+        document.getElementById('page2').classList.add('hidden');
+        document.getElementById('page3').classList.remove('hidden');
+        var counts = {};
+        answers.forEach(function(a){counts[a]=(counts[a]||0)+1});
+        var sorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]});
+        var type = types[sorted[0]%8];
+        var descs = {
+            "创造者":"你渴望通过创作留下独特影响。你有强烈的创造欲望，渴望通过你的作品在这个世界上留下独特的印记。",
+            "探索者":"你热爱体验，相信\"没有白走的路\"。你喜欢探索未知，经历丰富多样的人生体验。",
+            "企业家":"你有强烈的掌控欲和创建欲，不满足于执行别人的想法。你喜欢从0到1的过程。",
+            "投资者":"你对数字敏感，善于分析，明白\"让钱为你工作\"的道理。你喜欢思考长期收益。",
+            "专家":"你崇尚专业主义，相信\"打铁还需自身硬\"。你愿意在一个领域持续深耕。",
+            "连接者":"你善于人际交往，喜欢把对的人链接到对的事情上。",
+            "教育者":"你有强烈的分享欲和教育欲，看到别人成长会让你感到满足。",
+            "服务者":"你有强烈的同理心和助人愿望，看到别人因你的帮助而变好是你最大的满足。"
+        };
+        document.getElementById('resultTitle').innerText = '你是'+type+'型';
+        document.getElementById('resultDesc').innerText = descs[type];
+    }
     </script>
 </body>
 </html>
