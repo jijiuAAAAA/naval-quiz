@@ -3,141 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Excel 911｜表格急救站</title>
+  <title>Excel 911｜少即是多版</title>
   <style>
-    :root{
-      --bg:#070b1a;--card:#0f172a;--card2:#111c36;--line:#2b3a5f;--txt:#e5edff;--muted:#94a3c6;
-      --brand:#7c8cff;--brand2:#52d3ff;--ok:#86efac;--warn:#fbbf24;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;padding:18px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;color:var(--txt);
-      background:
-        radial-gradient(circle at 10% 0%, #1b2f6c 0, transparent 35%),
-        radial-gradient(circle at 90% 10%, #23367b 0, transparent 40%),
-        linear-gradient(160deg,#050814,#090f22 45%,#0b1530 100%);
-    }
-    .wrap{max-width:980px;margin:0 auto}
-    .hero{padding:22px;border-radius:20px;border:1px solid #32456f;background:linear-gradient(160deg,rgba(124,140,255,.2),rgba(82,211,255,.09));box-shadow:0 20px 50px rgba(0,0,0,.35)}
-    h1{margin:0 0 8px;font-size:30px}
-    .sub{color:#c7d4ff;line-height:1.6}
-    .pill{display:inline-block;margin-right:8px;margin-top:10px;padding:5px 10px;font-size:12px;border-radius:999px;border:1px solid #3d4f77;background:#0f1c35;color:#bad0ff}
-
-    .card{margin-top:14px;background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:14px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media (max-width:760px){.grid{grid-template-columns:1fr} h1{font-size:24px}}
-
-    label{display:block;font-size:12px;color:var(--muted);margin:2px 0 6px}
-    select,input,textarea{width:100%;border:1px solid #334973;background:#0a1226;color:#f1f5ff;border-radius:10px;padding:10px}
-    textarea{min-height:92px;line-height:1.5}
-
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    :root{--bg:#0b1020;--card:#111a33;--line:#304262;--text:#e8eeff;--muted:#9db0d9;--brand:#7b8cff}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(160deg,#070b18,#0d1730);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif}
+    .wrap{max-width:760px;margin:0 auto;padding:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}
+    h1{font-size:26px;margin:6px 0} p{margin:6px 0}.muted{color:var(--muted);font-size:13px}
+    textarea,select{width:100%;background:#0b1328;color:#fff;border:1px solid #304262;border-radius:10px;padding:10px}
+    textarea{min-height:88px}
+    .row{display:flex;gap:10px}.row>*{flex:1}
     button{border:none;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer}
-    .btn-main{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#061020}
-    .btn-sub{background:#243557;color:#dbe7ff}
-
-    pre{margin:8px 0 0;white-space:pre-wrap;background:#091126;border:1px solid #304669;border-radius:10px;padding:12px;line-height:1.55}
-    .muted{color:var(--muted);font-size:13px}
-    .price{font-size:14px;line-height:1.8}
-    .ok{color:var(--ok)} .warn{color:var(--warn)}
+    .main{background:var(--brand);color:#0a1020}.sub{background:#243758;color:#dbe7ff}
+    pre{white-space:pre-wrap;background:#0a1225;border:1px solid #2f4367;border-radius:10px;padding:10px;line-height:1.55}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <section class="hero">
+  <div class="card">
     <h1>Excel 911</h1>
-    <div class="sub">给职场人的表格急救站：<b>一句需求</b>，快速得到可用公式 + 诊断步骤。先帮你省下今晚加班时间。</div>
-    <span class="pill">20+高频模板</span><span class="pill">错误诊断</span><span class="pill">移动端友好</span>
-  </section>
+    <p>一句话描述需求，立即给你可用公式。</p>
+    <p class="muted">主路径：输入需求 → 生成公式 → 复制使用</p>
+  </div>
 
-  <section class="card">
-    <div class="grid">
-      <div>
-        <label>快速示例</label>
-        <select id="sample"></select>
-      </div>
-      <div>
-        <label>Excel版本</label>
-        <select id="ver">
-          <option value="365">Microsoft 365 / 2021+</option>
-          <option value="legacy">2016/2019（旧版）</option>
-        </select>
-      </div>
+  <div class="card">
+    <label class="muted">1) 选择示例（可跳过）</label>
+    <select id="sample"></select>
+    <br/><br/>
+    <label class="muted">2) 输入需求</label>
+    <textarea id="input" placeholder="例如：按客户去重后汇总金额"></textarea>
+    <br/>
+    <div class="row">
+      <button id="run" class="main">3) 生成公式</button>
+      <button id="copy" class="sub">复制公式</button>
     </div>
-    <label style="margin-top:8px">你的需求</label>
-    <textarea id="input" placeholder="例如：按客户去重后汇总金额，并按月份统计"></textarea>
-    <div class="actions">
-      <button id="run" class="btn-main">生成方案</button>
-      <button id="copy" class="btn-sub">复制公式</button>
-    </div>
-    <div class="muted" style="margin-top:8px">提示：先用5行样例验证，再上全量数据，稳定很多。</div>
-  </section>
+  </div>
 
-  <section class="card">
-    <h3>推荐公式</h3>
+  <div class="card">
+    <h3>结果</h3>
     <pre id="formula">等待生成...</pre>
-    <h3>解释与验证</h3>
-    <pre id="explain">等待生成...</pre>
-  </section>
+    <p class="muted">建议：先在5行样例上验证，再应用全量数据。</p>
+  </div>
 
-  <section class="card">
-    <h3>错误诊断向导</h3>
-    <div class="grid">
-      <div>
-        <label>错误类型</label>
-        <select id="errType">
-          <option value="#N/A">#N/A</option>
-          <option value="#VALUE!">#VALUE!</option>
-          <option value="#REF!">#REF!</option>
-          <option value="#NAME?">#NAME?</option>
-          <option value="#DIV/0!">#DIV/0!</option>
-        </select>
-      </div>
-      <div>
-        <label>具体场景（可选）</label>
-        <input id="scene" placeholder="例如：XLOOKUP 查不到客户" />
-      </div>
-    </div>
-    <div class="actions"><button id="diag" class="btn-sub">生成诊断步骤</button></div>
+  <details class="card">
+    <summary>遇到报错？点我看诊断（次要功能）</summary>
+    <br/>
+    <select id="errType">
+      <option value="#N/A">#N/A 查找不到</option>
+      <option value="#VALUE!">#VALUE! 类型错误</option>
+      <option value="#REF!">#REF! 引用失效</option>
+      <option value="#NAME?">#NAME? 函数名错误</option>
+    </select>
+    <br/><br/>
+    <button id="diag" class="sub">生成排查步骤</button>
     <pre id="diagOut">等待诊断...</pre>
-  </section>
-
-  <section class="card">
-    <h3>付费方案（验证中）</h3>
-    <div class="price">
-      免费版：每天3次<br/>
-      <span class="ok">Lite ¥9.9/月</span>：不限次数 + 常用模板包<br/>
-      <span class="warn">Pro ¥29.9/月</span>：批量任务 + 报表模板
-    </div>
-  </section>
+  </details>
 </div>
 
 <script>
 const presets=[
-{n:'按客户去重并汇总金额',k:['去重','汇总','金额'],f365:'=LET(u,UNIQUE(A2:A999),HSTACK(u,MAP(u,LAMBDA(x,SUMIFS(B:B,A:A,x)))))',fLegacy:'=SUMIFS($B:$B,$A:$A,E2)',e:'先UNIQUE提取客户，再SUMIFS汇总金额。旧版先手工去重。'},
-{n:'按月份统计销售额',k:['月份','统计'],f365:'=SUMIFS(C:C,A:A,">="&DATE(2026,3,1),A:A,"<"&DATE(2026,4,1))',fLegacy:'=SUMPRODUCT((TEXT(A2:A999,"yyyymm")="202603")*C2:C999)',e:'日期列必须是日期格式。'},
-{n:'精确查找客户等级',k:['查找','等级'],f365:'=XLOOKUP(E2,A:A,B:B,"未找到")',fLegacy:'=IFERROR(VLOOKUP(E2,$A:$B,2,FALSE),"未找到")',e:'XLOOKUP更稳；VLOOKUP注意查找列在最左。'},
-{n:'多条件求和',k:['多条件','求和'],f365:'=SUMIFS(C:C,A:A,"华东",B:B,">=1000")',fLegacy:'=SUMIFS(C:C,A:A,"华东",B:B,">=1000")',e:'范围长度建议一致。'},
-{n:'重复值标记',k:['重复','标记'],f365:'=IF(COUNTIF(A:A,A2)>1,"重复","")',fLegacy:'=IF(COUNTIF(A:A,A2)>1,"重复","")',e:'配合筛选可快速清理。'},
-{n:'默认模板',k:[],f365:'=IFERROR(你的公式,"请检查范围和数据类型")',fLegacy:'=IFERROR(你的公式,"请检查范围和数据类型")',e:'请补充：数据列、目标结果、Excel版本。'}
+  {n:'按客户去重并汇总金额',k:['去重','汇总','金额'],f:'=LET(u,UNIQUE(A2:A999),HSTACK(u,MAP(u,LAMBDA(x,SUMIFS(B:B,A:A,x)))))'},
+  {n:'按月份统计销售额',k:['月份','统计'],f:'=SUMIFS(C:C,A:A,">="&DATE(2026,3,1),A:A,"<"&DATE(2026,4,1))'},
+  {n:'精确查找客户等级',k:['查找','等级'],f:'=XLOOKUP(E2,A:A,B:B,"未找到")'},
+  {n:'多条件求和',k:['多条件','求和'],f:'=SUMIFS(C:C,A:A,"华东",B:B,">=1000")'},
+  {n:'重复值标记',k:['重复','标记'],f:'=IF(COUNTIF(A:A,A2)>1,"重复","")'},
+  {n:'默认模板',k:[],f:'=IFERROR(你的公式,"请检查范围和数据类型")'}
 ];
 const errMap={
-'#N/A':'1) 查找值是否存在\n2) 两侧是否有空格（TRIM/CLEAN）\n3) 数据类型是否一致（文本/数字）\n4) 用IFERROR包装提示',
-'#VALUE!':'1) 参数类型错误\n2) 日期是否为真实日期\n3) 分段拆公式定位\n4) 检查函数参数个数',
-'#REF!':'1) 引用区域被删\n2) 复制导致越界\n3) 命名区域失效\n4) 回退上个可用版本',
-'#NAME?':'1) 函数拼写错误\n2) 版本不支持新函数\n3) 文本未加引号\n4) 检查分隔符',
-'#DIV/0!':'1) 分母为0/空\n2) 加IFERROR或IF(分母=0,"")\n3) 先清洗异常数据'};
-
+  '#N/A':'1) 查找值不存在\n2) 数据类型不一致\n3) 先用TRIM清洗空格',
+  '#VALUE!':'1) 文本参与了数值计算\n2) 日期不是日期格式\n3) 分段定位错误',
+  '#REF!':'1) 引用列被删\n2) 复制时区域越界\n3) 回滚上个版本',
+  '#NAME?':'1) 函数拼写错误\n2) 版本不支持\n3) 文本缺引号'
+};
 const sample=document.getElementById('sample');
-for(const [i,p] of presets.entries()){const o=document.createElement('option');o.value=i;o.textContent=p.n;sample.appendChild(o)}
+presets.forEach((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=p.n;sample.appendChild(o)});
 sample.onchange=()=>document.getElementById('input').value=presets[sample.value].n;
 sample.dispatchEvent(new Event('change'));
-
-function pick(t){return presets.find(p=>p.k.length&&p.k.some(k=>t.includes(k)))||presets[presets.length-1]}
 let last='';
-document.getElementById('run').onclick=()=>{const t=document.getElementById('input').value.trim();const v=document.getElementById('ver').value;const r=pick(t);last=v==='365'?r.f365:r.fLegacy;document.getElementById('formula').textContent=last;document.getElementById('explain').textContent=`场景：${r.n}\n\n说明：${r.e}\n\n验证步骤：\n1) 先用5行样例验证\n2) 再扩大到全量数据\n3) 结果异常先查数据格式（数字/文本/日期）`;};
-document.getElementById('copy').onclick=async()=>{if(!last)return alert('先生成公式');await navigator.clipboard.writeText(last);alert('已复制');};
-document.getElementById('diag').onclick=()=>{const t=document.getElementById('errType').value;const s=document.getElementById('scene').value.trim();document.getElementById('diagOut').textContent=`错误类型：${t}\n场景：${s||'未填写'}\n\n排查步骤：\n${errMap[t]}\n\n修复后：用样例复跑并截图留档，便于下次复用。`;};
+function pick(t){return presets.find(p=>p.k.length&&p.k.some(k=>t.includes(k)))||presets[presets.length-1]}
+document.getElementById('run').onclick=()=>{const t=document.getElementById('input').value.trim();const r=pick(t);last=r.f;document.getElementById('formula').textContent=r.f;}
+document.getElementById('copy').onclick=async()=>{if(!last)return alert('先生成公式');await navigator.clipboard.writeText(last);alert('已复制')}
+document.getElementById('diag').onclick=()=>{const t=document.getElementById('errType').value;document.getElementById('diagOut').textContent=errMap[t]}
 </script>
 </body>
 </html>
