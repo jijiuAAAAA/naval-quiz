@@ -284,7 +284,7 @@
                 
                 <p>通过10道题，帮你找到你的人生定位类型</p>
                 
-                <button class="btn" onclick="startQuiz()">开始测评</button>
+                <button class="btn" id="startBtn">开始测评</button>
             </div>
         </div>
         
@@ -597,6 +597,11 @@
             document.getElementById('resultPage').style.display = 'none';
             document.getElementById('introPage').style.display = 'block';
         }
+        
+        // 确保按钮点击有效
+        document.getElementById('startBtn').addEventListener('click', function() {
+            startQuiz();
+        });
     </script>
 </body>
 </html>
