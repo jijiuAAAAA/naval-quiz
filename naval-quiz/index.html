@@ -6,129 +6,186 @@
     <title>🎯 纳瓦尔人生定位测评</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; min-height: 100vh; }
-        .container { background: white; color: #333; padding: 24px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
-        h1 { text-align: center; font-size: 22px; margin-bottom: 8px; }
-        h2 { text-align: center; font-size: 18px; margin: 16px 0; color: #2c3e50; }
-        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 16px; }
-        .progress-bar { height: 6px; background: #e0e0e0; border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s ease; }
-        .progress-text { text-align: center; color: #999; font-size: 12px; margin-bottom: 16px; }
-        .question { font-size: 17px; font-weight: 600; margin-bottom: 20px; line-height: 1.6; color: #2c3e50; }
-        .hint { font-size: 13px; color: #888; margin-bottom: 16px; font-style: italic; }
-        button { width: 100%; padding: 14px; font-size: 16px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 12px; cursor: pointer; margin: 8px 0; font-weight: 600; transition: all 0.3s ease; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); }
-        button:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
-        .btn-secondary { background: #6c757d; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+            padding: 18px;
+            max-width: 640px;
+            margin: 0 auto;
+            min-height: 100vh;
+            color: white;
+            background:
+                radial-gradient(circle at 15% 20%, #2b2f77 0%, transparent 35%),
+                radial-gradient(circle at 80% 10%, #4b2f7d 0%, transparent 35%),
+                linear-gradient(135deg, #12192f 0%, #171a3a 40%, #1f1432 100%);
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.97);
+            color: #333;
+            padding: 24px;
+            border-radius: 22px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(5px);
+            animation: riseIn .45s ease;
+        }
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(8px) scale(.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        h1 { text-align: center; font-size: 23px; margin-bottom: 8px; color: #1f284a; }
+        h2 { text-align: center; font-size: 18px; margin: 18px 0 14px; color: #2c3e50; }
+        .naval-quote { text-align: center; font-style: italic; color: #6c6f7d; margin: 14px 0; font-size: 13px; line-height: 1.65; }
+        .intro-desc { text-align:center;color:#555;margin:14px 0; line-height:1.6; }
+        .intro-tip { font-size:13px;color:#667; margin:14px 0; padding:12px; background:#f3f6ff; border-radius:10px; line-height: 1.7; }
+
+        .progress-bar { height: 8px; background: #e7eaf4; border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #8b5cf6); transition: width .25s ease; }
+        .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .progress-text { color: #81879a; font-size: 12px; }
+        .progress-percent { color: #667eea; font-size: 12px; font-weight: 700; }
+
+        .question { font-size: 18px; font-weight: 700; margin-bottom: 14px; line-height: 1.55; color: #25304d; }
+        .hint { font-size: 13px; color: #7f8597; margin-bottom: 12px; }
+        .selection-note { font-size: 12px; color: #667eea; margin-bottom: 10px; min-height: 16px; }
+
+        .option {
+            padding: 14px 16px;
+            border: 2px solid #e6e9f2;
+            margin: 8px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1.5;
+            transition: all 0.18s ease;
+            text-align: left;
+            position: relative;
+            background: #fff;
+        }
+        .option:hover { border-color: #8da1ff; background: #f7f9ff; transform: translateY(-1px); }
+        .option.selected { border-color: #667eea; background: #edf1ff; box-shadow: 0 6px 14px rgba(102, 126, 234, 0.15); }
+        .option.selected::after { content: "✓"; position: absolute; right: 12px; top: 11px; color: #667eea; font-weight: 800; }
+
+        button {
+            width: 100%; padding: 14px; font-size: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; border: none; border-radius: 12px;
+            cursor: pointer; margin: 8px 0; font-weight: 700; transition: all .22s ease;
+        }
+        button:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(102, 126, 234, 0.35); }
+        button:disabled { background: #c8cede; cursor: not-allowed; transform: none; box-shadow: none; }
+        .btn-secondary { background: #7b8090; }
         .hidden { display: none; }
-        .option { padding: 14px 16px; border: 2px solid #e0e0e0; margin: 8px 0; border-radius: 12px; cursor: pointer; font-size: 14px; line-height: 1.5; transition: all 0.2s ease; text-align: left; }
-        .option:hover { border-color: #667eea; background: #f8f9ff; }
-        .option.selected { border-color: #667eea; background: #e8ecff; }
-        .option-checkbox { display: flex; align-items: center; }
-        .option-checkbox::before { content: "☐"; margin-right: 10px; font-size: 18px; }
-        .option-checkbox.selected::before { content: "☑"; }
-        
-        .result-card { background: #f8f9fa; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-        .result-type { font-size: 20px; font-weight: bold; color: #667eea; margin-bottom: 8px; }
-        .result-score { font-size: 14px; color: #888; margin-bottom: 12px; }
-        .result-desc { font-size: 14px; line-height: 1.7; color: #555; margin-bottom: 12px; }
-        .result-quote { font-size: 13px; font-style: italic; color: #666; padding: 12px; background: #fff; border-left: 3px solid #667eea; margin: 12px 0; }
-        .result-action { font-size: 14px; line-height: 1.7; color: #333; padding: 12px; background: #e8f4f8; border-radius: 8px; }
-        .result-action strong { color: #667eea; }
-        
-        .types-list { margin-top: 16px; }
-        .type-row { display: flex; justify-content: space-between; padding: 8px 12px; background: #f0f0f0; border-radius: 6px; margin-bottom: 6px; font-size: 13px; }
-        .type-row.top { background: linear-gradient(90deg, #667eea20, #764ba220); border: 1px solid #667eea; }
-        
-        .naval-quote { text-align: center; font-style: italic; color: #888; margin: 16px 0; font-size: 13px; line-height: 1.6; }
+
+        .summary-box {
+            margin: 8px 0 16px;
+            padding: 13px 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #eef2ff, #f8f6ff);
+            border: 1px solid #dfe5ff;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #4a4f63;
+        }
+
+        .result-card { background: #f9faff; border-radius: 14px; padding: 16px; margin-bottom: 14px; border: 1px solid #e8ecfb; }
+        .result-type { font-size: 20px; font-weight: 800; color: #5a67d8; margin-bottom: 6px; }
+        .result-score { font-size: 13px; color: #7a7f8f; margin-bottom: 10px; }
+        .result-desc { font-size: 14px; line-height: 1.7; color: #53596a; margin-bottom: 10px; }
+        .result-quote { font-size: 13px; font-style: italic; color: #61677a; padding: 11px; background: #fff; border-left: 3px solid #7e8cff; margin: 10px 0; border-radius: 6px; }
+        .result-action { font-size: 14px; line-height: 1.7; color: #2f3850; padding: 11px; background: #edf7ff; border-radius: 8px; }
+
+        .types-list { margin-top: 10px; }
+        .type-row { display: flex; justify-content: space-between; padding: 9px 12px; background: #f4f5f8; border-radius: 8px; margin-bottom: 6px; font-size: 13px; color: #4d5363; }
+        .type-row.top { background: linear-gradient(90deg, #667eea1d, #8b5cf61d); border: 1px solid #a9b6ff; }
+
         .badge { display: inline-block; padding: 4px 10px; background: #667eea; color: white; border-radius: 20px; font-size: 12px; margin-right: 6px; }
-        .badge-2 { background: #764ba2; }
-        .badge-3 { background: #6c757d; }
+        .badge-2 { background: #7f56d9; }
+        .badge-3 { background: #6b7280; }
     </style>
 </head>
 <body>
     <div class="container" id="page1">
         <h1>🎯 纳瓦尔人生定位测评</h1>
         <p class="naval-quote">"Seek wealth, not money or status."<br>— Naval Ravikant</p>
-        <p style="text-align:center;color:#666;margin:16px 0;">基于纳瓦尔财富与幸福哲学<br>20道题，找到你的人生定位</p>
-        <p style="font-size:13px;color:#888;margin:16px 0;padding:12px;background:#f8f9fa;border-radius:8px;">
-            📝 支持多选：可根据实际情况选择多个选项<br>
-            ❓ 不确定时：可跳过或选择"不确定"
-        </p>
-        <button id="startBtn">开始测评</button>
-        <p style="text-align:center;color:#999;font-size:12px;margin-top:12px;">约需3分钟</p>
+        <p class="intro-desc">基于纳瓦尔财富与幸福哲学<br>20道题，帮你找到当前的人生驱动轴</p>
+        <p class="intro-tip">📝 大多数题支持多选，建议每题选 1-2 项最接近你的真实状态。<br>❓ 如果不确定，可直接跳过。</p>
+        <button id="startBtn">开始沉浸测评</button>
+        <p style="text-align:center;color:#8b8f9f;font-size:12px;margin-top:10px;">约需 3 分钟 · 无需注册</p>
     </div>
-    
+
     <div class="container hidden" id="page2">
         <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:5%"></div></div>
-        <p class="progress-text" id="progressText">1 / 20</p>
+        <div class="progress-row">
+            <p class="progress-text" id="progressText">1 / 20</p>
+            <p class="progress-percent" id="progressPercent">5%</p>
+        </div>
         <p class="question" id="qtitle"></p>
         <p class="hint" id="hint"></p>
+        <p class="selection-note" id="selectionNote"></p>
         <div id="options"></div>
         <div style="display:flex;gap:10px;">
             <button id="skipBtn" class="btn-secondary" style="flex:1;">不确定/跳过</button>
             <button id="nextBtn" style="flex:2;" disabled>下一题</button>
         </div>
     </div>
-    
+
     <div class="container hidden" id="page3">
         <h1>🎉 你的测评结果</h1>
-        
+        <div class="summary-box" id="summaryBox"></div>
         <div id="resultsContainer"></div>
-        
+
         <h2>📊 完整类型得分</h2>
         <div class="types-list" id="typesList"></div>
-        
-        <button onclick="location.reload()" style="margin-top:20px;">重新测评</button>
+
+        <button onclick="location.reload()" style="margin-top:16px;">重新测评</button>
     </div>
 
     <script>
     var current = 0;
     var answers = [];
     var skipped = [];
-    
+
     var types = [
-        {id:0, name:"作品型", desc:"你渴望创造能够流传于世的作品。纳瓦尔说：创造者留下作品，这是对抗时间的方式。你相信文字、代码、艺术、设计是最有价值的资产。", quote:"The output of creative work is how you generate wealth.", action:"建议：开始一个个人项目，写一本书、做一款App、或创作艺术作品。纳瓦尔说'产品化自己'，把你的创意变成可传播的作品。"},
-        {id:1, name:"体验型", desc:"你相信没有白走的路，每一段经历都是财富。纳瓦尔说生命是一场旅程，你渴望最大化体验的广度和深度。旅行、冒险、新奇事物是你的动力。", quote:"Life is not about money, not about status.", action:"建议：制定年度体验清单，尝试新事物。纳瓦尔说'玩长期游戏'，把每一次体验都当作长期投资的一部分。"},
-        {id:2, name:"公益型", desc:"你具有强烈的同理心和利他主义。纳瓦尔说幸福是一种选择，你选择帮助他人。你相信真正的财富在于改变他人的生活。", quote:"The goal is to make people's lives better.", action:"建议：找到你认可的社会议题，参与志愿者工作或支持慈善事业。纳瓦尔说'财富的意义在于自由使用它'。"},
-        {id:3, name:"成就型", desc:"你渴望成功和认可。纳瓦尔说要和长期的人玩长期游戏，你追求在某个领域做到顶尖，获得成就感和他人尊重。", quote:"Become the best in the world at what you do.", action:"建议：选择一个细分领域，持续深耕。纳瓦尔说'找到你擅长的事，然后无限放大它'。"},
-        {id:4, name:"启发型", desc:"你热爱分享和启发他人。纳瓦尔说教育是人类进步的基石，你最大的快乐来自于看到别人因你而成长。", quote:"Teach and you shall learn twice.", action:"建议：开始写博客、拍视频、或做导师。纳瓦尔说'产品化自己'——把你的知识传播出去。"},
-        {id:5, name:"理念型", desc:"你是一个理想主义者，有自己的价值观体系。纳瓦尔强调理性佛教徒——用理性思考来指导生活。你追求智慧和思想的深度。", quote:"The rational mind is the servant of the emotional mind.", action:"建议：建立晨间思考习惯，阅读哲学和科学书籍。纳瓦尔说'幸福是一种可习得的技能'。"},
-        {id:6, name:"追梦型", desc:"你敢于梦想，不惧失败。纳瓦尔说如果你不持有观点，别人会替你决定，你坚持自己的人生叙事，不随波逐流。", quote:"If you don't know what you're doing, someone else will.", action:"建议：写下你的梦想清单，不要害怕设定大胆目标。纳瓦尔说'承担风险'是致富的关键。"},
-        {id:7, name:"内修型", desc:"你注重内在成长纳瓦尔说幸福和自我完善。是一种技能，你通过冥想、阅读、反思来修炼内心平静。", quote:"Happiness is a skill that can be developed.", action:"建议：建立冥想习惯，每天10分钟。纳瓦尔说'接受无法改变的，改变可以改变的'。"},
-        {id:8, name:"享受型", desc:"你懂得享受生活的美好。纳瓦尔说钱买不到幸福，但能买到自由，你相信及时行乐，享受当下的每一刻。", quote:"Play and rest are important too.", action:"建议：在追求财富的同时，定期犒劳自己。纳瓦尔说'健康是最大的财富'。"},
-        {id:9, name:"关系型", desc:"你重视人际关系和连接。纳瓦尔说和长期的人玩长期游戏，你相信人脉是最重要的资产，善于建立深度关系。", quote:"Play long-term games with long-term people.", action:"建议：投资于深度关系，定期与重要的人深入交流。纳瓦尔说'你的圈子的平均值决定你的水平'。"},
-        {id:10, name:"稳健型", desc:"你追求稳定和安全感。纳瓦尔说承担风险，但你更倾向于稳健前行，注重风险控制和长期规划。", quote:"Take risk, but do it methodically.", action:"建议：在稳健的同时，尝试小步试错。纳瓦尔说'99%的努力会失败，但要有韧性'。"},
-        {id:11, name:"技能型", desc:"你相信专业主义。纳瓦尔说specific knowledge无法被教导，你追求在某个领域成为专家，这是你的核心竞争力。", quote:"Arm yourself with specific knowledge.", action:"建议：识别你的独特技能，并持续投资于它。纳瓦尔说'specific knowledge是别人无法教你的'。"},
-        {id:12, name:"声望型", desc:"你渴望获得社会认可和地位。纳瓦尔说status是零和游戏，但你仍追求在自己的圈子里获得尊重和影响力。", quote:"Status is a very old game.", action:"建议：把对声望的追求转化为创造价值。纳瓦尔说'真正的声望来自创造价值'。"},
-        {id:13, name:"企业型", desc:"你有强烈的创业精神。纳瓦尔说从0到1，你不满足于执行别人的想法，渴望创建自己的组织和事业。", quote:"Escape competition through authenticity.", action:"建议：开始你的创业实验，从最小可行产品开始。纳瓦尔说'创业是最高杠杆的行为'。"},
-        {id:14, name:"赚钱型", desc:"你热爱商业和财富创造。纳瓦尔说wealth是睡觉时也在赚钱的资产，你对商业机会敏感，追求财务自由。", quote:"Wealth is assets that earn while you sleep.", action:"建议：开始投资和资产积累，学习财务知识。纳瓦尔说'让钱为你工作'是财富的关键。"},
-        {id:15, name:"权力型", desc:"你渴望影响力和控制力。纳瓦尔说权力来自于被需要，你希望在自己的领域拥有话语权和决策权。", quote:"Power comes from being needed.", action:"建议：培养不可替代性，成为关键人物。纳瓦尔说'责任等于杠杆'。"}
+        {id:0, name:"作品型", desc:"你渴望创造能够流传于世的作品。你相信文字、代码、艺术、设计是最有价值的资产。", quote:"The output of creative work is how you generate wealth.", action:"从一个可交付的小作品开始：一篇长文、一个小产品或一套方法论，让价值可复用、可传播。"},
+        {id:1, name:"体验型", desc:"你相信每一段经历都能转化为认知与能量。旅行、冒险、新奇事物会激发你。", quote:"Life is not about money, not about status.", action:"建立年度体验清单，每月完成 1 项新体验，并记录你的洞察，形成长期复利。"},
+        {id:2, name:"公益型", desc:"你有较强同理心，愿意把能力用于帮助他人，你重视“价值外溢”。", quote:"The goal is to make people's lives better.", action:"选择一个长期关注议题，用稳定投入（时间/资金/技能）建立你自己的公益节奏。"},
+        {id:3, name:"成就型", desc:"你追求在具体领域成为头部，成就感和影响力是你的核心驱动力。", quote:"Become the best in the world at what you do.", action:"聚焦一个细分赛道，设定 90 天冲刺目标，把“结果”拆成可执行里程碑。"},
+        {id:4, name:"启发型", desc:"你热爱分享、教学和点亮他人，成长型反馈会让你获得强满足感。", quote:"Teach and you shall learn twice.", action:"把你的经验产品化：每周输出一条可执行方法，持续积累个人影响力资产。"},
+        {id:5, name:"理念型", desc:"你有清晰价值观，倾向独立思考，追求认知深度与内在一致性。", quote:"The rational mind is the servant of the emotional mind.", action:"保持“输入-思考-输出”闭环：阅读、记录、复盘，形成你自己的判断框架。"},
+        {id:6, name:"追梦型", desc:"你愿意为理想承担不确定性，不甘于被动跟随，重视人生主导权。", quote:"If you don't know what you're doing, someone else will.", action:"写下 3 个你真正想做的目标，并选择一个用 7 天做出最小验证版本。"},
+        {id:7, name:"内修型", desc:"你重视内在成长与情绪稳定，通过反思、冥想、阅读追求长期平静。", quote:"Happiness is a skill that can be developed.", action:"建立每天 10 分钟的内在训练习惯（冥想/写反思），先稳住节奏，再扩大行动。"},
+        {id:8, name:"享受型", desc:"你懂得感受生活本身，追求高质量体验，重视“活得有滋味”。", quote:"Play and rest are important too.", action:"安排固定“恢复性时间”，让休息成为能力系统的一部分，而非奖励。"},
+        {id:9, name:"关系型", desc:"你重视深度连接，擅长通过长期信任关系创造机会与支持系统。", quote:"Play long-term games with long-term people.", action:"建立你的高质量关系清单，每周与关键人物进行一次有内容的深聊。"},
+        {id:10, name:"稳健型", desc:"你重视安全感和长期确定性，擅长风险控制和持续积累。", quote:"Take risk, but do it methodically.", action:"采用“小步试错+定期复盘”，在可控风险中提升进攻性。"},
+        {id:11, name:"技能型", desc:"你相信专业主义，愿意长期打磨不可替代的特定知识与能力。", quote:"Arm yourself with specific knowledge.", action:"明确你最有杠杆的核心技能，设定每周固定深度练习时间。"},
+        {id:12, name:"声望型", desc:"你重视认可与社会评价，希望在圈层内形成可见影响力。", quote:"Status is a very old game.", action:"把“被看见”转化成“被信任”：持续输出高价值成果而非短期标签。"},
+        {id:13, name:"企业型", desc:"你有创业者倾向，偏好从 0 到 1 搭建系统和组织。", quote:"Escape competition through authenticity.", action:"从一个最小可行项目开始，先验证需求，再逐步搭建组织与流程。"},
+        {id:14, name:"赚钱型", desc:"你对商业机会敏感，擅长从资源配置中寻找财富增长路径。", quote:"Wealth is assets that earn while you sleep.", action:"优先积累可复利资产（内容/产品/股权/技能），避免只用时间换收入。"},
+        {id:15, name:"权力型", desc:"你希望拥有更强决策权和资源调动能力，重视结构性影响力。", quote:"Power comes from being needed.", action:"打造不可替代性：在关键场景承担责任并持续兑现结果。"}
     ];
-    
+
     var questions = [
-        {q:"纳瓦尔说：If you don't know what you're doing, someone else will decide it for you. 你目前的困惑是？", hint:"可多选", o:[{t:0,a:"我不知道该创造什么来留下痕迹"},{t:1,a:"我不知道该如何体验更多"},{t:3,a:"我不知道如何成功"},{t:6,a:"我不敢追求真正的梦想"}]},
-        {q:"Escape competition through authenticity——你如何理解这句话？", hint:"可多选", o:[{t:0,a:"做真实的自己，不需要竞争"},{t:13,a:"找到没人做的细分领域"},{t:5,a:"追随内心，不随大流"},{t:11,a:"发挥自己独特的专长"}]},
-        {q:"什么样的工作让你觉得这是我才该做的？", hint:"可多选", o:[{t:0,a:"创造一些世界上不存在的东西"},{t:1,a:"每天都有新鲜感和挑战"},{t:11,a:"解决复杂专业问题"},{t:13,a:"带领团队完成目标"}]},
-        {q:"如果你财务自由了，你还会做什么？", hint:"可多选", o:[{t:0,a:"继续创作，因为热爱"},{t:1,a:"环游世界，体验不同文化"},{t:2,a:"做慈善帮助他人"},{t:7,a:"冥想、阅读、修行"}]},
-        {q:"纳瓦尔说和长期的人玩长期游戏，你最认同？", hint:"可多选", o:[{t:9,a:"和靠谱的人建立深度关系"},{t:10,a:"长期规划，稳健前行"},{t:11,a:"在一个领域深耕多年"},{t:13,a:"建立长期有价值的公司"}]},
-        {q:"你更容易对什么感到焦虑？", hint:"可多选", o:[{t:12,a:"在竞争中落后于别人"},{t:10,a:"投资失败或财务风险"},{t:3,a:"无法达成既定目标"},{t:6,a:"想法无法落地实现"}]},
-        {q:"纳瓦尔强调specific knowledge（特定知识），你的优势是？", hint:"可多选", o:[{t:11,a:"多年实践经验积累的技能"},{t:5,a:"独立思考和判断能力"},{t:13,a:"对商业和人的直觉"},{t:4,a:"把知识传递给他人"}]},
-        {q:"你更愿意成为什么样的人？", hint:"可多选", o:[{t:0,a:"留下传世作品的人"},{t:12,a:"被尊敬的专业人士"},{t:13,a:"创建伟大公司的人"},{t:4,a:"启发他人成长的人"}]},
-        {q:"纳瓦尔说Learn to sell, learn to build，你最想加强哪个？", hint:"可多选", o:[{t:0,a:"构建——做出产品/作品"},{t:9,a:"销售——链接人和资源"},{t:14,a:"商业——发现机会"},{t:11,a:"先构建，再销售"}]},
-        {q:"你对财富的定义是？", hint:"可多选", o:[{t:14,a:"能够产生现金流的资产"},{t:9,a:"时间自由，想做什么就做什么"},{t:10,a:"足够的储蓄和安全感"},{t:8,a:"能够享受生活的资源"}]},
-        {q:"面对风险，你的态度是？", hint:"可多选", o:[{t:13,a:"敢于冒险，抓住机会"},{t:10,a:"谨慎评估，控制风险"},{t:6,a:"不计后果，博一把"},{t:1,a:"把风险当成体验"}]},
-        {q:"你如何处理失败？", hint:"可多选", o:[{t:0,a:"把失败写成教训"},{t:1,a:"把它当作成长经历"},{t:7,a:"接纳并放下"},{t:13,a:"总结经验再来"}]},
-        {q:"你最大的快乐来自？", hint:"可多选", o:[{t:4,a:"看到别人因我成长"},{t:9,a:"和爱的人在一起"},{t:2,a:"帮助需要帮助的人"},{t:8,a:"美食、旅行、休闲"}]},
-        {q:"纳瓦尔说幸福是一种技能，你认同吗？", hint:"可多选", o:[{t:7,a:"完全认同，需要修炼"},{t:5,a:"认同，但需要理性思考"},{t:8,a:"幸福就是及时行乐"},{t:2,a:"幸福来自给予"}]},
-        {q:"你对成功的定义是？", hint:"可多选", o:[{t:3,a:"在领域内做到顶尖"},{t:12,a:"获得社会认可"},{t:13,a:"创建有影响力的组织"},{t:0,a:"留下有价值的作品"}]},
-        {q:"你如何规划自己的时间？", hint:"可多选", o:[{t:11,a:"大量时间用于精进技能"},{t:9,a:"优先维护人脉关系"},{t:1,a:"留出时间体验生活"},{t:7,a:"每天留出反思时间"}]},
-        {q:"你最看重什么价值观？", hint:"可多选", o:[{t:5,a:"真实、理性、独立思考"},{t:2,a:"善良、同理心、奉献"},{t:3,a:"卓越、执行力、结果"},{t:0,a:"创造力、独特性、永恒"}]},
-        {q:"如果只能选一个，你会选择？", hint:"单选", o:[{t:14,a:"很多钱"},{t:15,a:"很大权力"},{t:12,a:"很高声望"},{t:9,a:"完全自由"}]},
-        {q:"纳瓦尔说玩长期游戏，你认为最重要的是？", hint:"可多选", o:[{t:9,a:"选择对的人"},{t:10,a:"持续稳定"},{t:11,a:"不断提升"},{t:0,a:"积累价值"}]},
-        {q:"最后一道：你人生的核心追求是？", hint:"可多选", o:[{t:0,a:"创造有价值的东西"},{t:1,a:"经历丰富的人生"},{t:2,a:"让世界更美好"},{t:7,a:"获得内心平静"}]}
+        {q:"你目前最核心的困惑是？", hint:"可多选", o:[{t:0,a:"不知道该创造什么才能留下长期价值"},{t:1,a:"不知道如何让人生体验更丰富"},{t:3,a:"不知道怎样在事业上突破"},{t:6,a:"不敢真正追求自己想要的生活"}]},
+        {q:"你如何理解“Escape competition through authenticity”？", hint:"可多选", o:[{t:0,a:"做真实的自己，构建独特作品"},{t:13,a:"找到差异化赛道，避开同质竞争"},{t:5,a:"坚持内在价值观，不盲从"},{t:11,a:"发挥自己不可替代的特长"}]},
+        {q:"什么样的工作会让你觉得“这就是我该做的”？", hint:"可多选", o:[{t:0,a:"创造世界上原本没有的东西"},{t:1,a:"每天都有新鲜挑战"},{t:11,a:"解决高难度专业问题"},{t:13,a:"带领团队做成一件大事"}]},
+        {q:"如果已实现财务自由，你最想继续做什么？", hint:"可多选", o:[{t:0,a:"继续创作，因为热爱"},{t:1,a:"环游世界，体验不同文化"},{t:2,a:"长期做公益、帮助他人"},{t:7,a:"冥想、阅读、修行"}]},
+        {q:"关于“长期游戏”，你最认同哪几项？", hint:"可多选", o:[{t:9,a:"和靠谱的人建立深度关系"},{t:10,a:"稳步规划，长期积累"},{t:11,a:"在一个领域持续深耕"},{t:13,a:"打造能长期创造价值的组织"}]},
+        {q:"你最容易因为什么焦虑？", hint:"可多选", o:[{t:12,a:"在竞争中被比较和落后"},{t:10,a:"财务风险或不确定性"},{t:3,a:"目标长期无法达成"},{t:6,a:"好想法迟迟无法落地"}]},
+        {q:"你当前最有优势的“特定知识”是？", hint:"可多选", o:[{t:11,a:"长期实战沉淀的专业能力"},{t:5,a:"独立思考与判断"},{t:13,a:"商业判断与资源整合"},{t:4,a:"把复杂知识讲清楚"}]},
+        {q:"你更想成为哪类人？", hint:"可多选", o:[{t:0,a:"留下代表作的人"},{t:12,a:"被长期尊重的专业人士"},{t:13,a:"创建组织和事业的人"},{t:4,a:"持续启发他人成长的人"}]},
+        {q:"“Learn to sell, learn to build”，你当前更想强化？", hint:"可多选", o:[{t:0,a:"Build：做出产品/作品"},{t:9,a:"Sell：连接人和资源"},{t:14,a:"商业化：发现并放大机会"},{t:11,a:"先把核心能力做深，再外化"}]},
+        {q:"你对“财富”的定义更接近？", hint:"可多选", o:[{t:14,a:"能持续产出现金流的资产"},{t:9,a:"拥有时间自由"},{t:10,a:"稳定的安全感"},{t:8,a:"有能力享受生活"}]},
+        {q:"面对风险，你通常的决策方式是？", hint:"可多选", o:[{t:13,a:"敢于下注关键机会"},{t:10,a:"先评估，再行动"},{t:6,a:"先小范围试错，再加码"},{t:1,a:"把不确定性当作成长体验"}]},
+        {q:"你如何处理失败？", hint:"可多选", o:[{t:0,a:"沉淀成方法和复盘文档"},{t:1,a:"当作成长经历"},{t:7,a:"接纳并调整心态"},{t:13,a:"总结后快速再试"}]},
+        {q:"你最大的快乐通常来自？", hint:"可多选", o:[{t:4,a:"看到别人因为我而成长"},{t:9,a:"与重要的人深度连接"},{t:2,a:"帮助真正需要帮助的人"},{t:8,a:"高质量生活体验"}]},
+        {q:"你认同“幸福是一种技能”吗？", hint:"可多选", o:[{t:7,a:"认同，幸福需要训练"},{t:5,a:"认同，关键在认知系统"},{t:8,a:"幸福也来自当下的感受"},{t:2,a:"给予他人会增强幸福感"}]},
+        {q:"你对“成功”的定义更接近？", hint:"可多选", o:[{t:3,a:"在领域内做到顶尖"},{t:12,a:"获得广泛认可"},{t:13,a:"打造有影响力的组织"},{t:0,a:"留下长期有价值的作品"}]},
+        {q:"你目前如何分配时间？", hint:"可多选", o:[{t:11,a:"优先精进核心技能"},{t:9,a:"维护关键关系"},{t:1,a:"保留体验与探索时间"},{t:7,a:"固定留出反思时段"}]},
+        {q:"你最看重哪些价值观？", hint:"可多选", o:[{t:5,a:"真实、理性、独立"},{t:2,a:"善良、共情、利他"},{t:3,a:"卓越、执行、结果"},{t:0,a:"创造、独特、长期主义"}]},
+        {q:"如果必须只选一个，你会选？", hint:"单选", o:[{t:14,a:"更多财富"},{t:15,a:"更大影响力与决策权"},{t:12,a:"更高社会认可"},{t:9,a:"更强时间自由"}]},
+        {q:"你认为“长期游戏”最关键的是？", hint:"可多选", o:[{t:9,a:"选对长期同行者"},{t:10,a:"稳住节奏持续前进"},{t:11,a:"持续学习迭代"},{t:0,a:"长期积累可复用价值"}]},
+        {q:"最后一道：你人生的核心追求是？", hint:"可多选", o:[{t:0,a:"创造有价值的事物"},{t:1,a:"体验丰富的人生"},{t:2,a:"让世界变得更好一点"},{t:7,a:"获得内在平静"}]}
     ];
-    
+
     function init() {
         var startBtn = document.getElementById('startBtn');
         var nextBtn = document.getElementById('nextBtn');
@@ -149,55 +206,63 @@
         document.getElementById('page2').classList.remove('hidden');
         showQ();
     }
-    
+
     function showQ() {
-        var pct = Math.round((current+1)/questions.length*100);
+        var pct = Math.round((current + 1) / questions.length * 100);
         document.getElementById('progressFill').style.width = pct + '%';
-        document.getElementById('progressText').innerText = (current+1) + ' / ' + questions.length;
+        document.getElementById('progressText').innerText = (current + 1) + ' / ' + questions.length;
+        document.getElementById('progressPercent').innerText = pct + '%';
         document.getElementById('qtitle').innerText = questions[current].q;
-        document.getElementById('hint').innerText = questions[current].hint || "可多选";
-        
+        document.getElementById('hint').innerText = questions[current].hint || '可多选';
+
         var opts = document.getElementById('options');
         opts.innerHTML = '';
-        
-        // 检查是否单选模式
-        var singleMode = questions[current].hint === "单选";
-        
-        questions[current].o.forEach(function(item, i) {
+        var singleMode = questions[current].hint === '单选';
+
+        questions[current].o.forEach(function(item) {
             var d = document.createElement('div');
             d.className = 'option';
             d.innerText = item.a;
             d.dataset.type = item.t;
-            
-            if (singleMode) {
-                d.onclick = function() {
-                    document.querySelectorAll('.option').forEach(function(x){x.classList.remove('selected')});
+
+            d.onclick = function() {
+                if (singleMode) {
+                    document.querySelectorAll('.option').forEach(function(x) { x.classList.remove('selected'); });
                     this.classList.add('selected');
                     answers[current] = [item.t];
-                    document.getElementById('nextBtn').disabled = false;
-                };
-            } else {
-                d.onclick = function() {
+                } else {
                     this.classList.toggle('selected');
-                    var selected = Array.from(document.querySelectorAll('.option.selected')).map(function(x){return parseInt(x.dataset.type)});
+                    var selected = Array.from(document.querySelectorAll('.option.selected')).map(function(x) { return parseInt(x.dataset.type); });
                     answers[current] = selected;
-                    document.getElementById('nextBtn').disabled = selected.length === 0;
-                };
-            }
+                }
+                updateSelectionNote();
+                document.getElementById('nextBtn').disabled = !(answers[current] && answers[current].length);
+            };
+
             opts.appendChild(d);
         });
-        
-        var btnText = current === questions.length - 1 ? '查看结果' : '下一题';
-        document.getElementById('nextBtn').innerText = btnText;
+
+        document.getElementById('nextBtn').innerText = current === questions.length - 1 ? '查看结果' : '下一题';
         document.getElementById('nextBtn').disabled = true;
+        document.getElementById('selectionNote').innerText = singleMode ? '本题单选' : '本题可多选';
     }
-    
+
+    function updateSelectionNote() {
+        var selectedCount = (answers[current] || []).length;
+        var singleMode = questions[current].hint === '单选';
+        if (singleMode) {
+            document.getElementById('selectionNote').innerText = selectedCount ? '已选择 1 项' : '本题单选';
+        } else {
+            document.getElementById('selectionNote').innerText = selectedCount ? ('已选择 ' + selectedCount + ' 项') : '本题可多选';
+        }
+    }
+
     function skip() {
         skipped.push(current);
         answers[current] = [];
         next();
     }
-    
+
     function next() {
         if (current < questions.length - 1) {
             current++;
@@ -206,50 +271,53 @@
             showResult();
         }
     }
-    
+
     function showResult() {
         document.getElementById('page2').classList.add('hidden');
         document.getElementById('page3').classList.remove('hidden');
-        
-        // 统计得分
+
         var counts = {};
         answers.forEach(function(arr) {
             arr.forEach(function(t) { counts[t] = (counts[t] || 0) + 1; });
         });
-        
-        var sorted = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]});
+
+        var sorted = Object.keys(counts).sort(function(a, b) { return counts[b] - counts[a]; });
 
         if (sorted.length === 0) {
-            sorted = ['10', '7', '11']; // 全部跳过时给稳健的默认组合
+            sorted = ['10', '7', '11'];
             counts[10] = counts[10] || 0;
             counts[7] = counts[7] || 0;
             counts[11] = counts[11] || 0;
         }
-        
-        // 生成Top3结果
+
+        var totalAnswered = answers.filter(function(x) { return x && x.length > 0; }).length;
+        var topName = types[parseInt(sorted[0])].name;
+        document.getElementById('summaryBox').innerHTML =
+            '✨ 你当前最突出的驱动力是 <strong>' + topName + '</strong>。<br>' +
+            '📌 已作答 <strong>' + totalAnswered + '</strong> / ' + questions.length + ' 题，跳过 <strong>' + skipped.length + '</strong> 题。<br>' +
+            '🧭 建议先围绕主类型行动 2 周，再根据次类型做微调。';
+
         var container = document.getElementById('resultsContainer');
         container.innerHTML = '';
-        
         var top3 = sorted.slice(0, 3);
+
         top3.forEach(function(tid, idx) {
-            var t = types[tid];
+            var t = types[parseInt(tid)];
             var badge = idx === 0 ? '<span class="badge">主类型</span>' : (idx === 1 ? '<span class="badge badge-2">次类型</span>' : '<span class="badge badge-3">辅类型</span>');
-            
-            var html = '<div class="result-card">' + 
+            container.innerHTML +=
+                '<div class="result-card">' +
                 badge + '<div class="result-type">' + t.name + '</div>' +
-                '<div class="result-score">得分: ' + counts[tid] + ' 分</div>' +
+                '<div class="result-score">得分：' + counts[tid] + ' 分</div>' +
                 '<div class="result-desc">' + t.desc + '</div>' +
                 '<div class="result-quote">"' + t.quote + '"</div>' +
                 '<div class="result-action"><strong>💡 行动建议：</strong>' + t.action + '</div>' +
                 '</div>';
-            container.innerHTML += html;
         });
-        
-        // 显示完整得分列表
+
         var list = document.getElementById('typesList');
         list.innerHTML = '';
         sorted.forEach(function(tid, idx) {
-            var t = types[tid];
+            var t = types[parseInt(tid)];
             var row = document.createElement('div');
             row.className = 'type-row' + (idx < 3 ? ' top' : '');
             row.innerText = (idx + 1) + '. ' + t.name + ' - ' + counts[tid] + '分';
